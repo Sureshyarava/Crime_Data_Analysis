@@ -1,0 +1,99 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+
+header {
+  background-color: blue;
+  color: white;
+  padding: 10px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  background-color: blue;
+  padding: 10px;
+  list-style: none;
+}
+
+.navbar li {
+  display: inline;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  padding: 10px 20px;
+  background-color: orange;
+  border: 2px solid orange;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  background-color: white;
+  color: black;
+}
+
+footer {
+background-color: #333;
+color: #fff;
+text-align: center;
+padding: 10px 0;
+}
+
+.content {
+  margin: 20px;
+  text-align: center;
+}
+
+.slideshow-container {
+  position: relative;
+  margin: 20px 0;
+}
+
+.mySlides {
+  
+  align-items: center;
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.mySlides img {
+  width: 100%;
+}
+
+h2 {
+  margin: 20px 0;
+}
+
+/* Styling for individual pages */
+/* You can create separate CSS files for each page */
+.login, .signup, .about {
+  background-color: white;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 300px; /* Adjust the height to match your layout */
+}
+
+.image-container img {
+  max-width: 50%; /* Ensure the image doesn't exceed the container's width */
+  max-height: 100%; /* Ensure the image doesn't exceed the container's height */
+}
+
+
+/* Additional styles can be added as needed */

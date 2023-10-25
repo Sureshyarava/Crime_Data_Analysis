@@ -1,0 +1,96 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+.trend {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+}
+
+.navbar-trend {
+    display: flex;
+    justify-content: space-around;
+    background-color: blue;
+    padding: 10px;
+    list-style: none;
+}
+
+.navbar-trend li {
+    display: inline;
+}
+
+.navbar-trend a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    background-color: orange;
+    border: 2px solid orange;
+    border-radius: 5px;
+}
+
+.navbar-trend a:hover {
+    background-color: white;
+    color: black;
+}
+
+.content {
+    margin: 20px;
+    text-align: center;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid orange;
+    background-color: orange;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 45px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+img {
+    max-width: 100%;
+    margin-left: 20px;
+}
+
+/* Additional styles can be added as needed */
+
+/* Define styles for the select element */
+select {
+    padding: 10px;
+    border: 2px solid blue;
+    background-color: blue;
+    color: #fff;
+    border-radius: 5px;
+}
+
+/* Dropdown arrow styles */
+select::-ms-expand {
+    display: none;
+}
+
+/* Define styles for when the dropdown is open */
+select:focus {
+    outline: none;
+    box-shadow: 0 0 5px blue;
+}
