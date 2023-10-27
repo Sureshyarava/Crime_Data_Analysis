@@ -16,7 +16,7 @@ def get_data():
         data = fetch_data(trend_name)
         return jsonify(data)
     except Exception as e:
-        return jsonify({'error' : str(e)})
+        return jsonify({'Error' : str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
