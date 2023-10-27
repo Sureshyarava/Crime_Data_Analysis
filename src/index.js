@@ -25,7 +25,27 @@ const router = createBrowserRouter([
     element: <Dashboard />
   },
   {
-    path: "/trend",
+    path: "/trend1",
+    element: <Trend />
+  },
+  {
+    path: "/trend2",
+    element: <Trend />
+  },
+  {
+    path: "/trend3",
+    element: <Trend />
+  },
+  {
+    path: "/trend4",
+    element: <Trend />
+  },
+  {
+    path: "/trend5",
+    element: <Trend />
+  },
+  {
+    path: "/trend6",
     element: <Trend />
   },
 ]);

@@ -7,14 +7,14 @@ body, h1, h2, p, ul, li {
 .trend {
     background-color: blue;
     color: white;
-    padding: 10px;
+    padding: 2%; /* Convert padding to a percentage */
 }
 
 .navbar-trend {
     display: flex;
     justify-content: space-around;
     background-color: blue;
-    padding: 10px;
+    padding: 2%; /* Convert padding to a percentage */
     list-style: none;
 }
 
@@ -25,9 +25,9 @@ body, h1, h2, p, ul, li {
 .navbar-trend a {
     text-decoration: none;
     color: white;
-    padding: 10px 20px;
+    padding: 2% 4%; /* Convert padding to a percentage */
     background-color: orange;
-    border: 2px solid orange;
+    border: 1% solid orange; /* Convert border to a percentage */
     border-radius: 5px;
 }
 
@@ -37,7 +37,7 @@ body, h1, h2, p, ul, li {
 }
 
 .content {
-    margin: 20px;
+    margin: 2%; /* Convert margin to a percentage */
     text-align: center;
 }
 
@@ -49,12 +49,12 @@ body, h1, h2, p, ul, li {
 
 button {
     border-radius: 20px;
-    border: 1px solid orange;
+    border: 1% solid orange; /* Convert border to a percentage */
     background-color: orange;
-    color: #FFFFFF;
-    font-size: 12px;
+    color: #fff;
+    font-size: 1.2%; /* Convert font-size to a percentage */
     font-weight: bold;
-    padding: 12px 45px;
+    padding: 2% 6%; /* Convert padding to a percentage */
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
@@ -70,15 +70,15 @@ button:focus {
 
 img {
     max-width: 100%;
-    margin-left: 20px;
+    margin-left: 2%; /* Convert margin to a percentage */
 }
 
 /* Additional styles can be added as needed */
 
 /* Define styles for the select element */
 select {
-    padding: 10px;
-    border: 2px solid blue;
+    padding: 2%; /* Convert padding to a percentage */
+    border: 1% solid blue; /* Convert border to a percentage */
     background-color: blue;
     color: #fff;
     border-radius: 5px;
@@ -92,5 +92,5 @@ select::-ms-expand {
 /* Define styles for when the dropdown is open */
 select:focus {
     outline: none;
-    box-shadow: 0 0 5px blue;
+    box-shadow: 0 0 0.5% blue; /* Convert box-shadow to a percentage */
 }
