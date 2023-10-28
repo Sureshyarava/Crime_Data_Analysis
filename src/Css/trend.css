@@ -7,14 +7,14 @@ body, h1, h2, p, ul, li {
 .trend {
     background-color: blue;
     color: white;
-    padding: 2%; /* Convert padding to a percentage */
+    padding: 1%; /* Convert padding to a percentage */
 }
 
 .navbar-trend {
     display: flex;
     justify-content: space-around;
     background-color: blue;
-    padding: 2%; /* Convert padding to a percentage */
+    padding: 1%; /* Convert padding to a percentage */
     list-style: none;
 }
 
@@ -23,9 +23,10 @@ body, h1, h2, p, ul, li {
 }
 
 .navbar-trend a {
+    margin-right: 4%;
     text-decoration: none;
     color: white;
-    padding: 2% 4%; /* Convert padding to a percentage */
+    padding: 10px 20px; /* Convert padding to a percentage */
     background-color: orange;
     border: 1% solid orange; /* Convert border to a percentage */
     border-radius: 5px;

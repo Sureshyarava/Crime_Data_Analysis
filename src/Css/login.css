@@ -47,7 +47,15 @@ body, h1, h2, p, ul, li {
 	text-decoration: none;
 	margin: 15px 0;
   }
-  
+
+  #utility{
+	margin-left: 40%;
+  }
+
+  #utility li a{
+	margin: 2%;
+  }
+
   .navbar-login {
 	display: flex;
 	justify-content: space-around;

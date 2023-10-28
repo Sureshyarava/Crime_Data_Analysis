@@ -9,9 +9,11 @@ export default function Login() {
                 <nav>
                     <ul class="navbar-login">
                         <li><h2>Analytics Sign in/up </h2></li>
+                        <div id="utility">
                         <li><a href="/">Home</a></li>
                         <li><a href="/documentation">Documentation</a></li>
                         <li><a href="/about">About</a></li>
+                        </div>
                     </ul>
                 </nav>
             </header>

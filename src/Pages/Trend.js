@@ -8,7 +8,7 @@ export default function Trend() {
     return (
         <div class="wrapper">
             <div class="sidebar">
-                <a href="/dashboard"><h2>Dashboard</h2></a>
+                <a href="/dashboard"><h2 style={{marginTop:"-13%"}}>Dashboard</h2></a>
                 <ul>
                     <li><a href="/trend1">Trend 1</a></li>
                     <li><a href="/trend2">Trend 2</a></li>
@@ -36,7 +36,7 @@ function MainPage() {
             <header className="trend">
                 <nav>
                     <ul class="navbar-trend">
-                        <li><h1>Trend </h1></li>
+                        <li><h1>Trend</h1></li>
                     </ul>
                 </nav>
             </header>

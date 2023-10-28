@@ -10,9 +10,11 @@ export default function Home() {
                 <nav>
                     <ul class="navbar">
                         <li><h1>Analytics</h1></li>
+                        <div id="utility">
                         <li><a href="/documentation">Documentation</a></li>
                         <li><a href="/about">About</a></li>
                         <li><a href="/login">Login</a></li>
+                        </div>
                     </ul>
                 </nav>
             </header>
