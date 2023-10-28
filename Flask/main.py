@@ -15,7 +15,8 @@ def fetch_data(trend_name):
         # eprint(result)
         return result
     except Exception as e:
-        print("Error in fetching data")
+        raise Exception(e)
+        eprint("Error in fetching data")
 
 if __name__ == '__main__':
     result = fetch_data("temp_query")

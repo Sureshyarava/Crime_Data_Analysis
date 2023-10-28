@@ -6,7 +6,7 @@ class DbConnection:
     def __init__(self):
         self.username = os.environ.get('ORACLE_DB_USERNAME')
         self.pwd = os.environ.get('ORACLE_DB_PASSWORD')
-        self.conn_string = os.environ.get('ORACLE_DB_CONN_STRING')
+        self.conn_string = "oracle.cise.ufl.edu:1521/orcl"
         self.conn = None
         self.cursor = None
 
