@@ -1,7 +1,7 @@
 import React from "react";
-import chart from "../chart.png";
+// import chart from "../chart.png";
 import '../Css/trend.css';
-
+import Plot from "./Plot";
 
 
 export default function Trend() {
@@ -43,8 +43,8 @@ function MainPage() {
 
 
             <div class="content">
-                <h1>Analysis of Trend Data</h1>
-                <div class="content-container">
+                <h1 class="element">Analysis of Trend Data</h1>
+                <div class="content-container grid-container">
                     <div>
                         <label for="color">Input parameter</label>
                         <br></br>
@@ -87,7 +87,8 @@ function MainPage() {
                         <button class="button">Submit</button>
 
                     </div>
-                    <img src={chart} alt="chart" />
+                    {/* <img src={chart} alt="chart" /> */}
+                    <Plot />
                 </div>
             </div>
         </div>

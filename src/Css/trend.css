@@ -95,3 +95,13 @@ select:focus {
     outline: none;
     box-shadow: 0 0 0.5% blue; /* Convert box-shadow to a percentage */
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
+    gap: 10px; /* Adjust the gap between columns as needed */
+}
+
+.element {
+    padding-bottom: 100px; /* Adjust the value as needed */
+}
