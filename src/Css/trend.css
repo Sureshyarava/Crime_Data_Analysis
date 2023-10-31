@@ -99,7 +99,7 @@ select:focus {
 .grid-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Create two equal-width columns */
-    gap: 10px; /* Adjust the gap between columns as needed */
+    gap: 1px; /* Adjust the gap between columns as needed */
 }
 
 .element {

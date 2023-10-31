@@ -1,48 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import Chart from 'chart.js/auto';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+// import Chart from 'chart.js/auto';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 function Plot() {
     const [data, setData] = useState(null);
-    const chartRef = React.createRef();
-
-    useEffect(() => {
-        // Fetch data from the Flask API or data source
-        // For this example, we'll use sample data
-        const sampleData = {
-            labels: ['Label 1', 'Label 2', 'Label 3'],
-            values: [10, 20, 15],
-        };
-        setData(sampleData);
-    }, []);
-
-    useEffect(() => {
-        if (data) {
-            const ctx = chartRef.current.getContext('2d');
-            new Chart(ctx, {
-                type: 'bar', // Specify the chart type as 'bar'
-                data: {
-                    labels: data.labels,
-                    datasets: [
-                        {
-                            label: 'My Bar Chart',
-                            data: data.values,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1,
-                        },
-                    ],
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
-                },
-            });
-        }
-    }, [data, chartRef]); // Add data as a dependency
+    // const chartRef = React.createRef();
+    const chartRef = useRef();
     
+    const createChart = useCallback(() => {
+        if (chartRef.current && data) { // Check if chartRef is valid and data is not null
+          // Check if there's an existing chart, and destroy it
+          if (window.myChart) {
+            window.myChart.destroy();
+          }
+      
+          // Create a new chart
+          window.myChart = new Chart(chartRef.current, {
+            type: 'bar',
+            data: {
+              labels: data.map((dataPoint) => dataPoint.label),
+              datasets: [
+                {
+                  label: 'Sample Bar Graph',
+                  data: data.map((dataPoint) => dataPoint.value),
+                  backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                  borderColor: 'rgba(75, 192, 192, 1)',
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            },
+          });
+        }
+      }, [data]);
+      
+    
+    useEffect(() => {
+        fetch('http://127.0.0.1:5000/bar_data')
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Network response was not ok: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((result) => {
+            setData(result);
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }, []);
+    
+    useEffect(() => {
+    createChart();
+  }, [data, createChart]);
 
     return (
         <div>

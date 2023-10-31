@@ -44,8 +44,8 @@ function MainPage() {
 
             <div class="content">
                 <h1 class="element">Analysis of Trend Data</h1>
-                <div class="content-container grid-container">
-                    <div>
+                <div class="content-container  grid-container">
+                    <div class="inside1">
                         <label for="color">Input parameter</label>
                         <br></br>
                         <br></br>
@@ -87,8 +87,8 @@ function MainPage() {
                         <button class="button">Submit</button>
 
                     </div>
+                    <div class="inside2"><Plot /></div>
                     {/* <img src={chart} alt="chart" /> */}
-                    <Plot />
                 </div>
             </div>
         </div>

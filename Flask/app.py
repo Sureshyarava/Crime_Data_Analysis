@@ -4,11 +4,29 @@ from logger import eprint
 import io
 import matplotlib.pyplot as plt
 from flask_cors import CORS
+import datetime
 
 app = Flask(__name__)
 CORS(app)
 # configure_logger(app, 'custom_logger')
 
+
+def generate_sample_data():
+    data = []
+    current_year = datetime.date.today().year
+
+    for year in range(current_year - 20, current_year + 1, 2):
+        label = str(year) + '-' + str(year + 1)
+        value = 500*(year -2000) # Adjust this as needed
+        data_point = {'label': label, 'value': value}
+        data.append(data_point)
+
+    return data
+
+@app.route('/bar_data', methods=['GET'])
+def get_bar_data():
+    data = generate_sample_data()
+    return jsonify(data)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
@@ -24,26 +42,11 @@ def get_data():
 
 @app.route('/plot')
 def plot():
-    # Create a simple Matplotlib plot
-    # plt.plot([1, 2, 3, 4], [1, 4, 9, 16])
-
-    # Save the plot to a BytesIO object
-    # img_io = io.BytesIO()
-    # plt.savefig(img_io, format='png')
-    # img_io.seek(0)
-    return {
-        'Name':"geek", 
-        "Age":"22",
-        "Date": "25-09-2020", 
-        "programming":"python"
-        }
-    # Return the image data as a response with the appropriate content type
-    # return Response(img_io, content_type='image/png')
-
-@app.route('/plot2')
-def plot2():
-    data = [1, 2, 3, 4, 5]  # Replace this with your data source
-    return jsonify(data)
+    bar_data = {
+        'labels': ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        'values': [10, 20, 15, 30, 25, 35],
+    }
+    return jsonify(bar_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
