@@ -1,9 +1,35 @@
 from connect import DbConnection
 
 from logger import eprint
+
+table_names = ["SPABBATHI.IUCR", "SPABBATHI.FBI", "KONDURUS.LOCATION", "SPABBATHI.DISTRICT", "SPABBATHI.SEASON", "KONDURUS.DIVISION", "KONDURUS.GEO_COORDINATES"]
+
 query_list = {
-    "temp_query": "select * from employee"
+    "temp_query": "select * from employee",
+    "all_tuples_count": "(SELECT COUNT(*) AS COUNT FROM {})",
+    "trend1": """SELECT YEAR, COUNT(*) AS CRIME_COUNT
+FROM 
+(
+  SELECT EXTRACT(YEAR FROM TIME_STAMP) AS YEAR, A.*
+  FROM "YARAVA.VENKATASU".Crime_Incident A
+  JOIN SPABBATHI.IUCR B ON A.IUCR_CODE=B.IUCR_CODE
+  WHERE B.PRIMARY_DESCRIPTION = '{}'
+)
+GROUP BY YEAR  """
 }
+
+def fetch_all_tuples_count():
+    try:
+        db_connection = DbConnection()
+        db_connection.__connect__()
+        query = """SELECT SUM(COUNT) AS TOTAL_TUPLE_COUNT FROM (
+{}
+)""".format("\n UNION \n".join([query_list['all_tuples_count'].format(table_name) for table_name in table_names]))
+        eprint(query)
+        result = db_connection.execute_query(query)
+        return result
+    except Exception as e:
+        raise Exception(e)
 
 def fetch_data(trend_name):
     try:
@@ -19,5 +45,5 @@ def fetch_data(trend_name):
         eprint("Error in fetching data")
 
 if __name__ == '__main__':
-    result = fetch_data("temp_query")
-    eprint(result)
+    query = " UNION ".join([query_list['all_tuples_count'].format(table_name) for table_name in table_names])
+    print(query)
