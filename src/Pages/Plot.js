@@ -19,15 +19,24 @@ ChartJS.register(
 
 const Plot = ({ apdata }) => {
 
-  if (!apdata || !apdata.x || !apdata.y) {
+  console.log(apdata);
+
+  if (!apdata) {
     return null; 
   }
 
+  const label = apdata.map(entry => entry.YEAR);
+  const dataPoints = apdata.map(entry => entry.CRIME_COUNT);
+
+  const maxDataPoints = Math.max(dataPoints)
+
+  console.log(label);
+
   const dataset = {
-    labels: apdata.x,
+    labels: label,
     datasets: [{
       labels: 'Years',
-      data: apdata.y,
+      data: dataPoints,
       backgroundColor: "aqua",
       borderColor: 'black'
       // pointBorderColor: 'aqua'
@@ -42,12 +51,23 @@ const Plot = ({ apdata }) => {
     },
     scales: {
       x:{
-        min : 0,
-        max : 10
+        title: {
+          display: true,
+          text: 'Time', // X-axis label
+        },
+        min : 2001,
+        max : 2024
       },
       y: {
+        title: {
+          display: true,
+          text: 'Crime Count', // Y-axis label
+        },
         min: 0,
-        max: 10
+        max: maxDataPoints,
+        ticks: {
+          stepSize: 5, // Adjust the step size as needed
+        },
       }
     }
   }

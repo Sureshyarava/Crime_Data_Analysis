@@ -23,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-flask": "cd Flask && flask --app app run"
+    "start-flask": "python3 Flask/app.py"
   },
   "eslintConfig": {
     "extends": [
