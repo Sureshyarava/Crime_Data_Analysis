@@ -97,7 +97,7 @@ function MainPage() {
                 <input type="submit" value="Submit" style={{ background: "blue", color: "white", borderRadius: "3px" }} />
               </form>
             </div>
-            <div className="inside2" id="plot" style={{ display: showPlot ? "block" : "none" }}>
+            <div className="inside2" id="plot" style={{ display: showPlot ? "block" : "none" , width: "600px"}}>
             <Plot apdata={apiData}/>
             </div>
           </div>
