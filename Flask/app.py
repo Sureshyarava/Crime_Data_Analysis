@@ -46,7 +46,8 @@ def signup():
         query = query_list.get('signup')
         query = query.format(username, hashed_pwd)
         logger.info(str(query))
-        db_connection.execute_query(query=query, type='insert')
+        db_connection.execute_query(query=str(query), type='insert')
+        db_connection.close()
         return { "message" : "user signed up successfully"}, 200
     except Exception as e:
         logger.error("Error during signup: {}".format(e))
@@ -64,7 +65,7 @@ def login():
         query = query_list.get('login')
         query = query.format(username, hashed_pwd)
         logger.info(str(query))
-        result = db_connection.execute_query(query)
+        result = db_connection.execute_query(str(query))
         # result = db_connection.cursor.execute("SELECT * FROM KONDURUS.users WHERE USERNAME = 'test_user' AND PASSWORD = 'test_password'")
         data = []
         for row in result:
