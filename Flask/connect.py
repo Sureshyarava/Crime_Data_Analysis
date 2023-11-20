@@ -17,18 +17,35 @@ class DbConnection:
         except oracledb.DatabaseError as e:
             raise Exception("Error connecting to the database: {}".format(str(e)))
 
-    def execute_query(self, query):
+    def execute_query(self, query, type=''):
         if not self.cursor:
             raise Exception("Database connection is not established.")
         try:
+            print(type)
             result = self.cursor.execute(query)
-            data = []
-            for row in result:
-                data.append(dict(zip([column[0] for column in result.description], row)))
-            return data
+            # print("executed", result.description)
+            if type == 'insert':
+                print('INSERT TYPENLKDJGKLSJGSKLDJNKL')
+                return 
+            else:
+                data = []
+                for row in result:
+                    data.append(dict(zip([column[0] for column in result.description], row)))
+                print(data)
+                return data
         except oracledb.DatabaseError as e:
             raise Exception("Error executing query: {}".format(str(e)))
 
+    
+    # def commit(self):
+    #     if not self.conn:
+    #         raise Exception("Database connection is not established.")
+    #     try:
+    #         self.conn.commit()
+    #     except oracledb.DatabaseError as e:
+    #         raise Exception("Error commiting transaction to database: {}".format(str(e)))
+    
+    
     def close(self):
         if self.cursor:
             self.cursor.close()

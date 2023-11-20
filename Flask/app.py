@@ -35,6 +35,48 @@ def generate_sample_data():
 
     return data
 
+@app.route('/signup', methods=['POST'])
+def signup():
+    data = request.json
+    username = data['username']
+    hashed_pwd = data['hashed_pwd']
+    try:
+        db_connection = DbConnection()
+        db_connection.__connect__()
+        query = query_list.get('signup')
+        query = query.format(username, hashed_pwd)
+        logger.info(str(query))
+        db_connection.execute_query(query=query, type='insert')
+        return { "message" : "user signed up successfully"}, 200
+    except Exception as e:
+        logger.error("Error during signup: {}".format(e))
+        return { "message" : "user sign up failed"}, 400
+
+# Login endpoint
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    username = data['username']
+    hashed_pwd = data['hashed_pwd']
+    try:
+        db_connection = DbConnection()
+        db_connection.__connect__()
+        query = query_list.get('login')
+        query = query.format(username, hashed_pwd)
+        logger.info(str(query))
+        result = db_connection.execute_query(query)
+        # result = db_connection.cursor.execute("SELECT * FROM KONDURUS.users WHERE USERNAME = 'test_user' AND PASSWORD = 'test_password'")
+        data = []
+        for row in result:
+            data.append(dict(zip([column[0] for column in result.description], row)))
+        print(data)
+        if not result:
+            return {"message": "Invalid username or password"}, 400
+        return {"message": "username and password valid"}, 200
+    except Exception as e:
+        logger.error("Error during login: {}".format(e))
+        return { "message" : "Internal Server Error - User login failed. Try again"}, 500
+
 @app.route('/bar_data', methods=['GET'])
 def get_bar_data():
     data = generate_sample_data()
