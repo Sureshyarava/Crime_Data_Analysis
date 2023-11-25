@@ -22,10 +22,10 @@ export default function Login() {
                     <form action="#">
                         <h1>Create Account</h1>
                         <span>or use your email for registration</span>
-                        <input type="text" placeholder="Name" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
-                        <button>Sign Up</button>
+                        <input type="text"  id="signupname" placeholder="Name" />
+                        <input type="email" id="signupemail" placeholder="Email" />
+                        <input type="password" id="signuppassword" placeholder="Password" />
+                        <button onClick={handleSignup}>Sign Up</button>
                     </form>
                 </div>
                 <div class="form-container sign-in-container">
@@ -41,8 +41,8 @@ export default function Login() {
                 <div class="overlay-container">
                     <div class="overlay">
                         <div class="overlay-panel overlay-left">
-                            <h1>Welcome Back!</h1>
-                            <p>To keep connected, <br>
+                            <h1 id="message">Welcome Back!</h1>
+                            <p id="message1">To keep connected, <br>
                             </br>please login with your info</p>
                             <button class="ghost" id="signIn" onClick={myFunction}>Sign In</button>
                         </div>
@@ -72,3 +72,42 @@ function myFunction() {
         container.classList.remove("right-panel-active");
     });
 }
+
+function handleSignup() {
+    const name = document.getElementById('signupname').value;
+    const password = document.getElementById('signuppassword').value;
+    const email = document.getElementById('signupemail').value;
+
+    const url = 'http://127.0.0.1:5000/signup';
+    const requestData = {
+        "username": name,
+        "hashed_pwd": password,
+        "email" : email
+      }
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData), // Convert the data to JSON format
+      };
+     fetch(url,requestOptions)
+    .then((response) => {
+        if (!response.ok) {
+         throw new Error('Network response was not ok');
+         }
+          return response.json();
+    })
+    .then((data) => {
+          if(data.message.includes("user signed up successfully")){
+            document.getElementById("message").innerHTML = "Hurray!!!!";
+            document.getElementById("message1").innerHTML = "Account created sucessfully";
+            document.getElementById('signupname').value ="";
+            document.getElementById('signuppassword').value="";
+            document.getElementById('signupemail').value="";
+          }
+    })
+    .catch((error) => {
+        console.error('Error fetching data:', error);
+    });
+};

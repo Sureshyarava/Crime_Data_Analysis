@@ -40,11 +40,12 @@ def signup():
     data = request.json
     username = data['username']
     hashed_pwd = data['hashed_pwd']
+    email = data['email']
     try:
         db_connection = DbConnection()
         db_connection.__connect__()
         query = query_list.get('signup')
-        query = query.format(username, hashed_pwd)
+        query = query.format(username, hashed_pwd, email)
         logger.info(str(query))
         db_connection.execute_query(query=str(query), type='insert')
         db_connection.commit()
