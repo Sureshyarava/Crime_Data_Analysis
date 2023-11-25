@@ -5,7 +5,7 @@ from logger import eprint
 table_names = ["SPABBATHI.IUCR", "SPABBATHI.FBI", "KONDURUS.LOCATION", "SPABBATHI.DISTRICT", "SPABBATHI.SEASON", "KONDURUS.DIVISION", "KONDURUS.GEO_COORDINATES"]
 
 query_list = {
-    "signup": 'INSERT INTO "YARAVA.VENKATASU".Users (username, password, email) VALUES (\'{0}\', \'{1}\',\'{2}\')',
+    "signup": """INSERT INTO "YARAVA.VENKATASU".Users (firstname, lastname, password, typeofUser, email) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')""",
     "login": """SELECT * FROM "YARAVA.VENKATASU".Users WHERE USERNAME = '{0}' AND PASSWORD = '{1}'""",
     "temp_query": "select * from employee",
     "all_tuples_count": "(SELECT COUNT(*) AS COUNT FROM {})",

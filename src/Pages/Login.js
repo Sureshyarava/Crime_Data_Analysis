@@ -22,7 +22,13 @@ export default function Login() {
                     <form action="#">
                         <h1>Create Account</h1>
                         <span>or use your email for registration</span>
-                        <input type="text"  id="signupname" placeholder="Name" />
+                        <select id="dropdown" name="dropdown">
+                            <option value="User">User</option>
+                            <option value="Police">Police</option>
+                            <option value="Law enforcement officer">Law Enforcement Officer</option>
+                        </select>
+                        <input type="text"  id="signupfirstname" placeholder="First Name" />
+                        <input type="text"  id="signuplastname" placeholder="Last Name" />
                         <input type="email" id="signupemail" placeholder="Email" />
                         <input type="password" id="signuppassword" placeholder="Password" />
                         <button onClick={handleSignup}>Sign Up</button>
@@ -74,14 +80,18 @@ function myFunction() {
 }
 
 function handleSignup() {
-    const name = document.getElementById('signupname').value;
+    const firstname = document.getElementById('signupfirstname').value;
+    const lastname = document.getElementById('signuplastname').value;
     const password = document.getElementById('signuppassword').value;
     const email = document.getElementById('signupemail').value;
+    const dropdownValue = document.getElementById("dropdown").value;
 
     const url = 'http://127.0.0.1:5000/signup';
     const requestData = {
-        "username": name,
+        "firstname": firstname,
+        "lastname" : lastname,
         "hashed_pwd": password,
+        "type_of_user": dropdownValue,
         "email" : email
       }
     const requestOptions = {
@@ -94,7 +104,13 @@ function handleSignup() {
      fetch(url,requestOptions)
     .then((response) => {
         if (!response.ok) {
-         throw new Error('Network response was not ok');
+            alert("Retry signingup again");
+            document.getElementById('signupfirstname').value ="";
+            document.getElementById('signuplastname').value="";
+            document.getElementById('dropdown').value = "";
+            document.getElementById('signuppassword').value="";
+            document.getElementById('signupemail').value="";
+            throw new Error('Network response was not ok');
          }
           return response.json();
     })
@@ -102,7 +118,9 @@ function handleSignup() {
           if(data.message.includes("user signed up successfully")){
             document.getElementById("message").innerHTML = "Hurray!!!!";
             document.getElementById("message1").innerHTML = "Account created sucessfully";
-            document.getElementById('signupname').value ="";
+            document.getElementById('signupfirstname').value ="";
+            document.getElementById('signuplastname').value="";
+            document.getElementById('dropdown').value = "";
             document.getElementById('signuppassword').value="";
             document.getElementById('signupemail').value="";
           }

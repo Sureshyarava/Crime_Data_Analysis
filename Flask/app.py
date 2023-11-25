@@ -38,14 +38,16 @@ def generate_sample_data():
 @app.route('/signup', methods=['POST'])
 def signup():
     data = request.json
-    username = data['username']
+    firstname = data['firstname']
+    lastname = data['lastname']
     hashed_pwd = data['hashed_pwd']
+    type_of_user = data['type_of_user']
     email = data['email']
     try:
         db_connection = DbConnection()
         db_connection.__connect__()
         query = query_list.get('signup')
-        query = query.format(username, hashed_pwd, email)
+        query = query.format(firstname, lastname, hashed_pwd, type_of_user, email)
         logger.info(str(query))
         db_connection.execute_query(query=str(query), type='insert')
         db_connection.commit()
