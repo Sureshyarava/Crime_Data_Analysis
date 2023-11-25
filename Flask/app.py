@@ -47,6 +47,7 @@ def signup():
         query = query.format(username, hashed_pwd)
         logger.info(str(query))
         db_connection.execute_query(query=str(query), type='insert')
+        db_connection.commit()
         db_connection.close()
         return { "message" : "user signed up successfully"}, 200
     except Exception as e:

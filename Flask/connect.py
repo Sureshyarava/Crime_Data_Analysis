@@ -37,13 +37,13 @@ class DbConnection:
             raise Exception("Error executing query: {}".format(str(e)))
 
     
-    # def commit(self):
-    #     if not self.conn:
-    #         raise Exception("Database connection is not established.")
-    #     try:
-    #         self.conn.commit()
-    #     except oracledb.DatabaseError as e:
-    #         raise Exception("Error commiting transaction to database: {}".format(str(e)))
+    def commit(self):
+        if not self.conn:
+            raise Exception("Database connection is not established.")
+        try:
+            self.conn.commit()
+        except oracledb.DatabaseError as e:
+            raise Exception("Error commiting transaction to database: {}".format(str(e)))
     
     
     def close(self):
