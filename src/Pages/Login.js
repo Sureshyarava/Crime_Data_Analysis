@@ -4,6 +4,47 @@ import Footer from "../Footer";
 import setCookie from "./SetCookieJs";
 
 export default function Login() {
+
+  function handleLogin() {
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+
+    if (emailInput.value === "" || passwordInput.value === "") {
+      alert("Email or password should not be null");
+      return false;
+    }
+
+    const email = emailInput.value;
+    const password = passwordInput.value;
+    const hashed_pwd = btoa(password);
+    const url = 'http://127.0.0.1:5000/login';
+    const requestData = {
+      "username": email,
+      "hashed_pwd": hashed_pwd,
+    };
+
+    const requestOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(requestData),
+    };
+
+    fetch(url, requestOptions)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      setCookie("authToken", data.token, 6);
+      window.location.href = "./dashboard";
+    })
+    .catch((error) => {
+      console.error('Error fetching data:', error);
+      alert("An error occurred. Please try again.");
+    });
+} 
+
     return (
         <div className="login">
             <header className="header-login">
@@ -36,13 +77,13 @@ export default function Login() {
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form  id= "form" action="#">
+                    <form  id= "form" onSubmit={handleLogin}>
                         <h1>Sign in</h1>
                         <span>or use your account</span>
                         <input id= "email" type="email" placeholder="Email" />
                         <input id= "password" type="password" placeholder="Password" />
                         <a href="#">Forgot your password?</a>
-                        <button onClick={handleLogin}>Sign In</button>
+                        <button type="submit" >Sign In</button>
                     </form>
                 </div>
                 <div className="overlay-container">
@@ -126,53 +167,6 @@ function handleSignup() {
             document.getElementById('dropdown').value = "";
             document.getElementById('signuppassword').value="";
             document.getElementById('signupemail').value="";
-          }
-    })
-    .catch((error) => {
-        console.error('Error fetching data:', error);
-    });
-};
-
-function handleLogin(){
-
-    if (document.getElementById('email').value == ""){
-        alert("Email or password should not be null");
-        return false
-    }
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-
-    const hashed_pwd = btoa(password)
-
-    const url = 'http://127.0.0.1:5000/login';
-    const requestData = {
-        "username" : email,
-        "hashed_pwd": hashed_pwd,
-      }
-    const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData), // Convert the data to JSON format
-      };
-     fetch(url,requestOptions)
-    .then((response) => {
-        if (!response.ok) {
-            alert("Invalid Password or UserName");
-            document.getElementById('email').value ="";
-            document.getElementById('password').value ="";
-            throw new Error('Network response was not ok');
-         }
-          window.location.href = "./dashboard";
-          return response.json();
-    })
-    .then((data) => {
-          if(data.message.includes("username and password valid")){
-            setCookie("authToken", data.token , 2);
-            console.log("logined sucessfully");
           }
     })
     .catch((error) => {

@@ -5,4 +5,5 @@ export default function setCookie(name, value, hoursToExpire) {
     let cookieValue = encodeURIComponent(name) + "=" + encodeURIComponent(value) + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
     document.cookie = cookieValue;
+    return;
 }
