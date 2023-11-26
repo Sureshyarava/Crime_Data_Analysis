@@ -93,7 +93,7 @@ function handleSignup() {
     const requestData = {
         "firstname": firstname,
         "lastname" : lastname,
-        "hashed_pwd": password,
+        "hashed_pwd": hashed_pwd,
         "type_of_user": dropdownValue,
         "email" : email
       }
@@ -135,7 +135,7 @@ function handleSignup() {
 
 function handleLogin(){
 
-    if (document.getElementById('email').value === ""){
+    if (document.getElementById('email').value == ""){
         alert("Email or password should not be null");
         return false
     }
