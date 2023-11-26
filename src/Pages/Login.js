@@ -89,7 +89,7 @@ function handleSignup() {
 
     const hashed_pwd = btoa(password)
 
-    const url = 'http://127.0.0.1:5000/Signup';
+    const url = 'http://127.0.0.1:5000/signup';
     const requestData = {
         "firstname": firstname,
         "lastname" : lastname,
