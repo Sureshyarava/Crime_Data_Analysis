@@ -6,7 +6,7 @@ table_names = ["SPABBATHI.IUCR", "SPABBATHI.FBI", "KONDURUS.LOCATION", "SPABBATH
 
 query_list = {
     "signup": """INSERT INTO "YARAVA.VENKATASU".Users (firstname, lastname, password, typeofUser, email) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')""",
-    "login": """SELECT * FROM "YARAVA.VENKATASU".Users WHERE USERNAME = '{0}' AND PASSWORD = '{1}'""",
+    "login": """SELECT * FROM "YARAVA.VENKATASU".Users WHERE EMAIL = '{0}' AND PASSWORD = '{1}'""",
     "temp_query": "select * from employee",
     "all_tuples_count": "(SELECT COUNT(*) AS COUNT FROM {})",
     "trend1": """SELECT YEAR, COUNT(*) AS CRIME_COUNT

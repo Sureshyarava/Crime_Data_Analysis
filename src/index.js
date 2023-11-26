@@ -8,7 +8,12 @@ import {
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import Dashboard from './Pages/Dashboard';
-import Trend from './Pages/Trend';
+import Trend1 from './Pages/Trend1';
+import Trend2 from './Pages/Trend2';
+import Trend3 from './Pages/Trend3';
+import Trend4 from './Pages/Trend4';
+import Trend5 from './Pages/Trend5';
+import Trend6 from './Pages/Trend6';
 
 
 const router = createBrowserRouter([
@@ -26,27 +31,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/trend1",
-    element: <Trend />
+    element: <Trend1 />
   },
   {
     path: "/trend2",
-    element: <Trend />
+    element: <Trend2 />
   },
   {
     path: "/trend3",
-    element: <Trend />
+    element: <Trend3 />
   },
   {
     path: "/trend4",
-    element: <Trend />
+    element: <Trend4 />
   },
   {
     path: "/trend5",
-    element: <Trend />
+    element: <Trend5 />
   },
   {
     path: "/trend6",
-    element: <Trend />
+    element: <Trend6 />
   },
 ]);
 

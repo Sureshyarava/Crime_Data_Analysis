@@ -2,23 +2,35 @@ import React, { useState } from "react";
 // import chart from "../chart.png";
 import '../Css/trend.css';
 import Plot from "./Plot";
+import getCookie from "./GetCookieJs";
+import handleLogout from "./HandleLogoutJs";
 
 
-export default function Trend() {
+export default function Trend4() {
+  const [href, setHref] = useState('./trend4');
+
+  const handleLinkClick = (path) => {
+    const authToken = getCookie("authToken");
+    if (authToken) {
+        setHref(path);
+    } else {
+        setHref('./login');
+    }
+}
   return (
     <div className="wrapper">
       <div className="sidebar">
         <a href="/dashboard"><h2 style={{ marginTop: "-13%" }}>Dashboard</h2></a>
         <ul>
-          <li><a href="/trend1">Trend 1</a></li>
-          <li><a href="/trend2">Trend 2</a></li>
-          <li><a href="/trend3">Trend 3</a></li>
-          <li><a href="/trend4">Trend 4</a></li>
-          <li><a href="/trend5">Trend 5</a></li>
-          <li><a href="/trend6">Trend 6</a></li>
+        <li><a href={href} onClick={() => handleLinkClick("/trend1")}>Trend 1</a></li>
+                    <li><a href={href} onClick={() => handleLinkClick("/trend2")}>Trend 2</a></li>
+                    <li><a href={href} onClick={() => handleLinkClick("/trend3")}>Trend 3</a></li>
+                    <li><a href={href} onClick={() => handleLinkClick("/trend4")}>Trend 4</a></li>
+                    <li><a href={href} onClick={() => handleLinkClick("/trend5")}>Trend 5</a></li>
+                    <li><a href={href} onClick={() => handleLinkClick("/trend6")}>Trend 6</a></li>
         </ul>
         <div className="social_media">
-          <a href="\">Logout</a>
+        <a href={handleLogout}>Logout</a>
 
         </div>
       </div>

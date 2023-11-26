@@ -3,6 +3,7 @@ from main import *
 from logging.config import dictConfig
 import logging
 import sys
+import random
 from flask_cors import CORS
 import datetime
 
@@ -34,6 +35,15 @@ def generate_sample_data():
         data.append(data_point)
 
     return data
+
+def generate_token(type_of_user):
+    temp = "L"
+    if type == "User":
+        temp = "U"
+    elif type == "Police":
+        temp = "P"
+    token = str(random.randint(100,999)) + temp + str(random.randint(100,999))
+    return token
 
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -71,13 +81,13 @@ def login():
         logger.info(str(query))
         result = db_connection.execute_query(str(query))
         # result = db_connection.cursor.execute("SELECT * FROM KONDURUS.users WHERE USERNAME = 'test_user' AND PASSWORD = 'test_password'")
-        data = []
-        for row in result:
-            data.append(dict(zip([column[0] for column in result.description], row)))
-        print(data)
+        # data = []
+        # for row in result:
+        #     data.append(dict(zip([column[0] for column in result], row)))
+        logger.info(result)
         if not result:
             return {"message": "Invalid username or password"}, 400
-        return {"message": "username and password valid"}, 200
+        return {"message": "username and password valid", "token" : "{0}".format(generate_token(result[0]['TYPEOFUSER']))}, 200
     except Exception as e:
         logger.error("Error during login: {}".format(e))
         return { "message" : "Internal Server Error - User login failed. Try again"}, 500
