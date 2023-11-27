@@ -19,28 +19,11 @@ logger.setLevel(logging.DEBUG)
 logger.addHandler(console_handler)
 app.logger = logger
 
-
-valid_input_params = {
-    'trend1': ["crime_type"]
-}
-
-def generate_sample_data():
-    data = []
-    current_year = datetime.date.today().year
-    for year in range(current_year - 20, current_year + 1, 2):
-        label = str(year) + '-' + str(year + 1)
-        value = int(datetime.datetime.now().microsecond) % 10000
-        logger.info("Temp {}".format(value))
-        data_point = {'label': label, 'value': value}
-        data.append(data_point)
-
-    return data
-
 def generate_token(type_of_user):
     temp = "L"
-    if type == "User":
+    if type_of_user == "User":
         temp = "U"
-    elif type == "Police":
+    elif type_of_user == "Police":
         temp = "P"
     token = str(random.randint(100,999)) + temp + str(random.randint(100,999))
     return token
@@ -80,40 +63,25 @@ def login():
         query = query.format(username, hashed_pwd)
         logger.info(str(query))
         result = db_connection.execute_query(str(query))
-        # result = db_connection.cursor.execute("SELECT * FROM KONDURUS.users WHERE USERNAME = 'test_user' AND PASSWORD = 'test_password'")
-        # data = []
-        # for row in result:
-        #     data.append(dict(zip([column[0] for column in result], row)))
         logger.info(result)
         if not result:
-            return {"message": "Invalid username or password"}, 400
-        return {"message": "username and password valid", "token" : "{0}".format(generate_token(result[0]['TYPEOFUSER']))}, 200
+            return {"message": "Username/password is not valid!"}, 400
+        return {"message": "Username/password is valid!", "token" : "{0}".format(generate_token(result[0]['TYPEOFUSER']))}, 200
     except Exception as e:
         logger.error("Error during login: {}".format(e))
         return { "message" : "Internal Server Error - User login failed. Try again"}, 500
 
-@app.route('/bar_data', methods=['GET'])
-def get_bar_data():
-    data = generate_sample_data()
-    logger.info("Bar Data {}".format(data))
-    return jsonify(data)
-
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    try:
-        trend_name = request.args.get('trend_name')
-        if not trend_name:
-            raise Exception("Trend Name is mandatory")
-        data = fetch_data(trend_name)
-        return jsonify(data)
-    except Exception as e:
-        logger.error(str(e))
-        return jsonify({'Error' : str(e)})
     
 @app.route('/all_tuples_count', methods=['GET'])
 def get_all_tuples_count():
     try:
-        data = fetch_all_tuples_count()
+        db_connection = DbConnection()
+        db_connection.__connect__()
+        query = """SELECT SUM(COUNT) AS TOTAL_TUPLE_COUNT FROM (
+{}
+)""".format("\n UNION \n".join([query_list['all_tuples_count'].format(table_name) for table_name in table_names]))
+        eprint(query)
+        data = db_connection.execute_query(query)
         return jsonify(data)
     except Exception as e:
         logger.error(str(e))
@@ -123,26 +91,49 @@ def get_all_tuples_count():
 def get_trend1():
     try:
         data = request.json
-        eprint(data)
         trend_name = data.get('trend_name')
         input_params = data['params']
-        # if not trend_name:
-        #     raise Exception("Trend Name is mandatory in payload")
-        # for param in input_params:
-        #     if param not in valid_input_params[trend_name]:
-        #         raise Exception("One or more input param provided is not valid for {}".format(trend_name))
-        data = fetch_data(trend_name)
+        if not trend_name:
+            raise Exception("Trend Name is mandatory in payload")
+        for param in input_params:
+            if param not in valid_input_params[trend_name]:
+                raise Exception("One or more input param provided is not valid for {}".format(trend_name))
         db_connection = DbConnection()
         db_connection.__connect__()
         query = query_list.get(trend_name)
-        # eprint(query)
-        query = query.format(input_params['crime_type'])
+        query = query.format(str(input_params['season_name']), str(input_params['crime_type']).replace(']','').replace('[','').replace('"','\''))
+        logger.info(query)
         result = db_connection.execute_query(query)
-        # eprint(result)
         return jsonify(result)
     except Exception as e:
         logger.error(str(e))
         return jsonify({'Error' : str(e)})
+
+
+@app.route('/trend3', methods=['POST'])
+def get_trend3():
+    try:
+        data = request.json
+        trend_name = data.get('trend_name')
+        input_params = data['params']
+        if not trend_name:
+            raise Exception("Trend Name is mandatory in payload")
+        for param in input_params:
+            if param not in valid_input_params[trend_name]:
+                raise Exception("One or more input param provided is not valid for {}".format(trend_name))
+        if not input_params['day_of_week']:
+            input_params['day_of_week'] = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+        db_connection = DbConnection()
+        db_connection.__connect__()
+        query = query_list.get(trend_name)
+        query = query.format(str(input_params['day_of_week']).replace(']','').replace('[','').replace('"','\''), str(input_params['crime_type']))
+        logger.info(query)
+        result = db_connection.execute_query(query)
+        return jsonify(result)
+    except Exception as e:
+        logger.error(str(e))
+        return jsonify({'Error' : str(e)})
+
 
 
 if __name__ == '__main__':
