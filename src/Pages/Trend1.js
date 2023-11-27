@@ -97,7 +97,7 @@ function MainPage() {
       <header className="trend">
         <nav>
           <ul className="navbar-trend">
-            <li><h1>Trend</h1></li>
+            <li><h1>Evolving Crime Trends</h1></li>
           </ul>
         </nav>
       </header>
@@ -156,5 +156,6 @@ function MainPage() {
         </div>
       </div>
     </div>
+    
   );
 }

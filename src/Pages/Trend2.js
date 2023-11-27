@@ -96,7 +96,7 @@ function MainPage() {
       <header className="trend">
         <nav>
           <ul className="navbar-trend">
-            <li><h1>Trend</h1></li>
+            <li><h1>Geographical Analysis of Safety and Security Trend</h1></li>
           </ul>
         </nav>
       </header>

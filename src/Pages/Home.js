@@ -23,7 +23,7 @@ export default function Home() {
                     <ul className="navbar">
                         <li><h1>Analytics</h1></li>
                         <div id="utility">
-                            <li><a href="/documentation">Documentation</a></li>
+                            <li><a href="/document">Documentation</a></li>
                             <li><a href="/about">About</a></li>
                             <li><a href={href} onClick={handleLogin}>Login</a></li>
                         </div>

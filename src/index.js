@@ -14,12 +14,17 @@ import Trend3 from './Pages/Trend3';
 import Trend4 from './Pages/Trend4';
 import Trend5 from './Pages/Trend5';
 import Trend6 from './Pages/Trend6';
+import Document from './Pages/Document';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />
+  },
+  {
+    path: "/document",
+    element: <Document />
   },
   {
     path: "/login",
