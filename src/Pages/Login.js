@@ -11,6 +11,7 @@ export default function Login() {
 
     if (emailInput.value === "" || passwordInput.value === "") {
       alert("Email or password should not be null");
+      window.location.href = "./login";
       return false;
     }
 
@@ -42,7 +43,7 @@ export default function Login() {
     })
     .catch((error) => {
       console.error('Error fetching data:', error);
-      alert("An error occurred. Please try again.");
+    //   alert("An error occurred. Please try again.");
     });
 } 
 
