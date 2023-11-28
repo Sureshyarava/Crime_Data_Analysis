@@ -119,9 +119,10 @@ ORDER BY B.Year, B.Location_Type""",
 
 
     "trend5": """
-SELECT Time_Period, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes
+SELECT Year, Month, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes
 FROM (
-  SELECT CONCAT(CONCAT(A.Year, '-'), LPAD(A.Month, 2, '0')) AS Time_Period,
+  SELECT A.Year,
+         A.Month,
          A.Crime_Id,
          CASE  
              WHEN A.HOUR BETWEEN 4 AND 11 THEN 'Morning'
@@ -140,8 +141,8 @@ FROM (
   WHERE A.Year IN ('2020', '2021', '2022', '2023')
   ) B
 WHERE B.Crime_Category = '{0}'
-GROUP BY Time_Period, Time_Interval
-ORDER BY Time_Period, Time_Interval""",
+GROUP BY Year, Month, Time_Interval
+ORDER BY Year, Month, Time_Interval""",
 
 
     "trend6": """
