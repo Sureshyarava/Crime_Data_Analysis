@@ -38,7 +38,10 @@ export default function Trend1() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
+        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational 
+          and educational purposes only. The analysis and trends presented in this report are based on publicly 
+          available crime data and are 
+          subject to the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   )
@@ -114,23 +117,27 @@ function MainPage() {
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
-            <br />
             <form style={{ backgroundColor: "#F3F5F9", display: "flex", flexDirection: "column" }} onSubmit={handleSubmit}>
+            <strong><h2>Select a Specific Season </h2> </strong>
+            <br></br>
+            <div style={{ display: "flex", flexDirection: "row" }}>
+                <label style={{ marginRight: "10px" }}></label>
+                <input type="radio" id="summer" name="season" value="summer" style={{ marginRight: "10px" }} />
+                <label htmlFor="summer">Summer</label>
 
-              <div>
-                <label>Season:</label>
-                <br />
-                <label htmlFor="summer" style={{display:"flex"}}><input type="radio" id="summer" name="season" value="summer" /> Summer </label>
-                <br />
-                <label htmlFor="winter" style={{display:"flex"}}><input type="radio" id="winter" name="season" value="winter" />Winter </label>
-                <br />
-                <label htmlFor="fall" style={{display:"flex"}}><input type="radio" id="fall" name="season" value="fall" /> Fall </label>
-                <br />
-                <label htmlFor="spring" style={{display:"flex"}}><input type="radio" id="spring" name="season" value="spring" /> Spring </label>
-              </div>
-              <label htmlFor="dropdown">Select crime types (at least one and at most three):</label>
+                <input type="radio" id="winter" name="season" value="winter" style={{ marginRight: "10px", marginLeft: "20px" }} />
+                <label htmlFor="winter">Winter</label>
+
+                <input type="radio" id="fall" name="season" value="fall" style={{ marginRight: "10px", marginLeft: "20px" }} />
+                <label htmlFor="fall">Fall</label>
+
+                <input type="radio" id="spring" name="season" value="spring" style={{ marginLeft: "20px" }} />
+                <label htmlFor="spring">Spring</label>
+            </div>
+              <br></br>
+              <label htmlFor="dropdown">Select atmost 3 crime types :</label>
               <br />
-              <select id="dropdown" name="dropdown" multiple size="2">
+              <select id="dropdown" name="dropdown" multiple size="10">
                 <option value="ROBBERY">ROBBERY</option>
                 <option value="HOMICIDE">HOMICIDE</option>
                 <option value="CRIMINAL DAMAGE">CRIMINAL DAMAGE</option>

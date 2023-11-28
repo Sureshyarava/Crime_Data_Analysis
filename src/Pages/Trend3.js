@@ -156,63 +156,72 @@ function MainPage() {
                 <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
               </select>
               <br />
-              <label style={{ display: 'inline', marginRight: '10px' }}>
-              Monday 
-                <input
-                  type="checkbox"
-                  value="monday"
-                  checked={selectedDays.includes("monday")}
-                  onChange={() => handleCheckboxChange("monday")}
-                /></label>
-              <label style={{ display: 'inline', marginRight: '10px' }}>
-              Tuesday
-                <input
-                  type="checkbox"
-                  value="tuesday"
-                  checked={selectedDays.includes("tuesday")}
-                  onChange={() => handleCheckboxChange("tuesday")}
-                />  </label>
-              <label style={{ display: 'inline', marginRight: '10px' }}>
-                Wednesday
-                <input
-                  type="checkbox"
-                  value="wednesday"
-                  checked={selectedDays.includes("wednesday")}
-                  onChange={() => handleCheckboxChange("wednesday")}
-                />  </label>
-              <label style={{ display: 'inline', marginRight: '10px' }}>
-                Thursday
-                <input
-                  type="checkbox"
-                  value="thursday"
-                  checked={selectedDays.includes("thursday")}
-                  onChange={() => handleCheckboxChange("thursday")}
-                />  </label>
-              <label style={{ display: 'inline', marginRight: '10px' }}>
-                Friday
-                <input
-                  type="checkbox"
-                  value="friday"
-                  checked={selectedDays.includes("friday")}
-                  onChange={() => handleCheckboxChange("friday")}
-                />  </label>
-              <label style={{ display: 'inline', marginRight: '10px' }}>
-                Saturday
-                <input
-                  type="checkbox"
-                  value="saturday"
-                  checked={selectedDays.includes("saturday")}
-                  onChange={() => handleCheckboxChange("saturday")}
-                />  </label>
-              <label style={{ display: 'inline', marginRight: '10px' }}>
-                Sunday
-                <input
-                  type="checkbox"
-                  value="friday"
-                  checked={selectedDays.includes("sunday")}
-                  onChange={() => handleCheckboxChange("sunday")}
-                />  </label>
-              <br />
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+  <label style={{ display: 'inline', marginRight: '10px' }}>
+    Monday
+    <input
+      type="checkbox"
+      value="monday"
+      checked={selectedDays.includes('monday')}
+      onChange={() => handleCheckboxChange('monday')}
+    />
+  </label>
+  <label style={{ display: 'inline', marginRight: '10px' }}>
+    Tuesday
+    <input
+      type="checkbox"
+      value="tuesday"
+      checked={selectedDays.includes('tuesday')}
+      onChange={() => handleCheckboxChange('tuesday')}
+    />
+  </label>
+  <label style={{ display: 'inline', marginRight: '10px' }}>
+    Wednesday
+    <input
+      type="checkbox"
+      value="wednesday"
+      checked={selectedDays.includes('wednesday')}
+      onChange={() => handleCheckboxChange('wednesday')}
+    />
+  </label>
+  <label style={{ display: 'inline', marginRight: '10px' }}>
+    Thursday
+    <input
+      type="checkbox"
+      value="thursday"
+      checked={selectedDays.includes('thursday')}
+      onChange={() => handleCheckboxChange('thursday')}
+    />
+  </label>
+  <label style={{ display: 'inline', marginRight: '10px' }}>
+    Friday
+    <input
+      type="checkbox"
+      value="friday"
+      checked={selectedDays.includes('friday')}
+      onChange={() => handleCheckboxChange('friday')}
+    />
+  </label>
+  <label style={{ display: 'inline', marginRight: '10px' }}>
+    Saturday
+    <input
+      type="checkbox"
+      value="saturday"
+      checked={selectedDays.includes('saturday')}
+      onChange={() => handleCheckboxChange('saturday')}
+    />
+  </label>
+  <label style={{ display: 'inline', marginRight: '10px' }}>
+    Sunday
+    <input
+      type="checkbox"
+      value="sunday"
+      checked={selectedDays.includes('sunday')}
+      onChange={() => handleCheckboxChange('sunday')}
+    />
+  </label>
+</div>
+
               <input type="submit" value="Submit" style={{ background: "blue", color: "white", borderRadius: "3px" }} />
             </form>
           </div>

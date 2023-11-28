@@ -98,13 +98,13 @@ function MainPage() {
       <header className="trend">
         <nav>
           <ul className="navbar-trend">
-            <li><h1>Dynamic Crime Analysis Trend</h1></li>
+            {/* <li><h1>Dynamic Crime Analysis Trend</h1></li> */}
           </ul>
         </nav>
       </header>
 
       <div className="content">
-        <h1 className="element">Analysis of Trend Data</h1>
+        <h1 className="element">Dynamic Crime Analysis Trend</h1>
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
