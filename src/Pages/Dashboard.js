@@ -41,7 +41,7 @@ export default function Dashboard() {
                     </nav>
                 </header>
                 <div class="content">
-                <h1>Welcome to Your Dashboard</h1>
+                <h1>Welcome !!!</h1>
                 <br></br><br></br><br></br>
                 <h4>Designed to provide a comprehensive overview of crime trends, our dashboard transforms raw data into actionable information. </h4>
                 <br></br>
