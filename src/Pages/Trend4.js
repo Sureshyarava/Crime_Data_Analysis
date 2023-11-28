@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import chart from "../chart.png";
 import '../Css/trend.css';
-import Plot from "./Plot";
+import Plot3 from "./Plot3";
 import getCookie from "./GetCookieJs";
 import handleLogout from "./HandleLogoutJs";
 
@@ -53,13 +53,13 @@ function MainPage() {
   };
 
   const handleSubmit = (event) => {
-    const dropdownValue = document.getElementById("dropdown").value;
+    const dropdownValue = getSelectedDropdownValues();
     event.preventDefault();
-    const url = 'http://127.0.0.1:5000/trend1';
+    const url = 'http://127.0.0.1:5000/trend4';
     const requestData = {
-      "trend_name" : "trend1",
+      "trend_name" : "trend4",
        "params": {
-        "crime_type" : dropdownValue
+        "location_type" : dropdownValue
       }
     };
     const requestOptions = {
@@ -78,9 +78,13 @@ function MainPage() {
         return response.json();
       })
       .then((data) => {
+
+        const segregatedData = segregateData(data);
+
+        console.log(segregateData)
         
         // Store the fetched data in state
-        setApiData(data);
+        setApiData(segregatedData);
         // Toggle divs to hide input and show the plot
         toggleDivs();
       })
@@ -109,50 +113,89 @@ function MainPage() {
             <form style={{ backgroundColor: "#F3F5F9", display: "flex" }} onSubmit={handleSubmit}>
               <label htmlFor="dropdown">Select the crime type:</label>
               <br />
-              <select id="dropdown" name="dropdown">
-                <option value="ROBBERY">ROBBERY</option>
-                <option value="HOMICIDE">HOMICIDE</option>
-                <option value="CRIMINAL DAMAGE">CRIMINAL DAMAGE</option>
-                <option value="CRIMINAL TRESPASS">CRIMINAL TRESPASS</option>
-                <option value="KIDNAPPING">KIDNAPPING</option>
-                <option value="NARCOTICS">NARCOTICS</option>
-                <option value="OTHER OFFENSE">OTHER OFFENSE</option>
-                <option value="RITUALISM">RITUALISM</option>
-                <option value="ARSON">ARSON</option>
-                <option value="DECEPTIVE PRACTICE">DECEPTIVE PRACTICE</option>
-                <option value="SEX OFFENSE">SEX OFFENSE</option>
-                <option value="BATTERY">BATTERY</option>
-                <option value="CONCEALED CARRY LICENSE VIOLATION">CONCEALED CARRY LICENSE VIOLATION</option>
-                <option value="PROSTITUTION">PROSTITUTION</option>
-                <option value="OBSCENITY">OBSCENITY</option>
-                <option value="CRIMINAL ABORTION">CRIMINAL ABORTION</option>
-                <option value="ASSAULT">ASSAULT</option>
-                <option value="CRIMINAL SEXUAL ASSAULT">CRIMINAL SEXUAL ASSAULT</option>
-                <option value="THEFT">THEFT</option>
-                <option value="GAMBLING">GAMBLING</option>
-                <option value="OTHER NARCOTIC VIOLATION">OTHER NARCOTIC VIOLATION</option>
-                <option value="WEAPONS VIOLATION">WEAPONS VIOLATION</option>
-                <option value="HUMAN TRAFFICKING">HUMAN TRAFFICKING</option>
-                <option value="PUBLIC INDECENCY">PUBLIC INDECENCY</option>
-                <option value="LIQUOR LAW VIOLATION">LIQUOR LAW VIOLATION</option>
-                <option value="INTERFERENCE WITH PUBLIC OFFICER">INTERFERENCE WITH PUBLIC OFFICER</option>
-                <option value="INTIMIDATION">INTIMIDATION</option>
-                <option value="PUBLIC PEACE VIOLATION">PUBLIC PEACE VIOLATION</option>
-                <option value="NON-CRIMINAL">NON-CRIMINAL</option>
-                <option value="STALKING">STALKING</option>
-                <option value="BURGLARY">BURGLARY</option>
-                <option value="MOTOR VEHICLE THEFT">MOTOR VEHICLE THEFT</option>
-                <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
+              <select id="dropdown" name="dropdown" multiple size="4">
+                <option value="Residential Areas">Residential Areas</option>
+                <option value="Commercial Areas">Commercial Areas</option>
+                <option value="Educational Institutions">Educational Institutions</option>
+                <option value="Transportation Areas">Transportation Areas</option>
+                <option value="Healthcare Facilities">Healthcare Facilities</option>
+                <option value="Government and Public Facilities">Government and Public Facilities</option>
+                <option value="Miscellaneous Location">Miscellaneous Location</option>
               </select>
               <br />
               <input type="submit" value="Submit" style={{ background: "blue", color: "white", borderRadius: "3px" }} />
             </form>
           </div>
           <div className="inside2" id="plot" style={{ display: showPlot ? "block" : "none", width: "600px" }}>
-            <Plot apdata={apiData} />
+            <Plot3 apdata={apiData} />
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+function getSelectedDropdownValues() {
+  // Get the <select> element by its ID
+  const dropdown = document.getElementById("dropdown");
+
+  // Create an array to store the values of selected options
+  const selectedValues = [];
+
+  // Iterate over the options and add the value to the array if the option is selected
+  for (let i = 0; i < dropdown.options.length; i++) {
+    if (dropdown.options[i].selected) {
+      selectedValues.push(dropdown.options[i].value);
+    }
+  }
+
+  // Log or use the collected selected values as needed
+  console.log(selectedValues);
+
+  // Return the array if needed
+  return selectedValues;
+}
+
+
+function segregateData(data) {
+
+  if (!data) {
+    console.error('Data is null or undefined');
+    return {};
+  }
+
+  const segregatedData = {};
+
+  // Iterate over the data and segregate based on crime type
+  data.forEach(entry => {
+    const location_type = entry.LOCATION_TYPE;
+
+    // If the crime type doesn't exist in segregatedData, create an empty array
+    if (!segregatedData[location_type]) {
+      segregatedData[location_type] = [];
+    }
+
+    // Push an object with only "NUMBER_OF_CRIMES" and "YEAR" properties
+    segregatedData[location_type].push({
+      NUMBER_OF_CRIMES: entry.NUMBER_OF_CRIMES,
+      YEAR: entry.YEAR,
+    });
+  });
+  const locationTypeToIndex = {};
+const locationTypes = Object.keys(segregatedData);
+
+// Iterate over crime types and replace keys with indices
+locationTypes.forEach((locationType, index) => {
+  locationTypeToIndex[index] = locationType;
+});
+
+// Create a new object with indices as keys
+const segregatedData1 = {};
+locationTypes.forEach((locationType, index) => {
+  segregatedData1[index] = segregatedData[locationType];
+});
+
+console.log(segregatedData1)
+
+  return segregatedData1;
 }

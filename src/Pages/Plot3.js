@@ -324,6 +324,26 @@ const Plot3 = ({ apdata }) => {
     <div>
       <Line
         data={dataset}
+        options={{
+          scales: {
+            x: {
+              type: 'linear', // You can use 'linear' or 'time' depending on your data
+              position: 'bottom',
+              title: {
+                display: true,
+                text: 'Year'
+              }
+            },
+            y: {
+              type: 'linear',
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Number of Crimes'
+              }
+            }
+          }
+        }}
       ></Line>
     </div>
   );
