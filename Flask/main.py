@@ -2,7 +2,7 @@ from connect import DbConnection
 
 from logger import eprint
 
-table_names = ["SPABBATHI.IUCR", "SPABBATHI.FBI", "KONDURUS.LOCATION", "SPABBATHI.DISTRICT", "SPABBATHI.SEASON", "KONDURUS.DIVISION", "KONDURUS.GEO_COORDINATES"]
+table_names = ["SPABBATHI.IUCR", "SPABBATHI.FBI", "KONDURUS.LOCATION", "SPABBATHI.DISTRICT", "SPABBATHI.SEASON", "KONDURUS.DIVISION", "KONDURUS.GEO_COORDINATES", "'YARAVA.VENKATASU'.CRIME_INCIDENT" ]
 
 valid_input_params = {
     'trend1': ["season_name", "crime_type"],

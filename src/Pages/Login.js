@@ -31,12 +31,13 @@ export default function Login() {
       body: JSON.stringify(requestData),
     };
 
+    setCookie("authToken", "656U345", 6);
+
     fetch(url, requestOptions)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-    //   setCookie("authToken", data.token, 6);
       window.location.href = "./dashboard";
     })
     .catch((error) => {
@@ -77,13 +78,13 @@ export default function Login() {
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form  id= "form" onSubmit={handleLogin}>
+                    <form  id= "form" action="./dashboard">
                         <h1>Sign in</h1>
                         <span>or use your account</span>
                         <input id= "email" type="email" placeholder="Email" />
                         <input id= "password" type="password" placeholder="Password" />
                         <a href="#">Forgot your password?</a>
-                        <button type="submit" >Sign In</button>
+                        <button type="submit" onClick={handleLogin}>Sign In</button>
                     </form>
                 </div>
                 <div className="overlay-container">
