@@ -6,13 +6,18 @@ table_names = ["SPABBATHI.IUCR", "SPABBATHI.FBI", "KONDURUS.LOCATION", "SPABBATH
 
 valid_input_params = {
     'trend1': ["season_name", "crime_type"],
-    'trend3': ["day_of_week", "crime_type"]
+    'trend2': ["district_name", "radius"],
+    'trend3': ["day_of_week", "crime_type"],
+    'trend5': ["crime_category"]
 }
 
 query_list = {
     "signup": """INSERT INTO "YARAVA.VENKATASU".Users (firstname, lastname, password, typeofUser, email) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')""",
+
     "login": """SELECT * FROM "YARAVA.VENKATASU".Users WHERE EMAIL = '{0}' AND PASSWORD = '{1}'""",
+
     "all_tuples_count": "SELECT COUNT(*) AS COUNT FROM {}",
+
     "trend1": """
 SELECT C.Year, I.Primary_Description AS Crime_Type, count(C.Crime_Id) as Number_Of_Crimes
 FROM (
@@ -24,6 +29,37 @@ INNER JOIN "SPABBATHI".Season S on S.Month = C.Month
 WHERE S.Season_name = '{0}' and I.Primary_Description in ({1})
 GROUP BY C.Year, I.Primary_Description
 ORDER BY C.Year, I.Primary_Description""",
+
+    "trend2": """
+SELECT L.Year, L.Month, COUNT(L.Crime_Id) AS Number_Of_Crimes
+FROM (
+    SELECT K.Crime_Id, K.Year, K.Month,
+            6371 * ACOS( COS(K.Latitude/57.2957795) * COS(K.District_Latitude/57.2957795) *
+            COS(K.Longitude/57.2957795 - K.District_Longitude/57.2957795) +
+            SIN(K.Latitude/57.2957795) * SIN(K.District_Latitude/57.2957795)) AS Distance
+    FROM 
+    (
+        SELECT Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, EXTRACT(MONTH FROM time_stamp) as Month, G.Latitude, G.Longitude, J.District_Latitude, J.District_Longitude
+        FROM "YARAVA.VENKATASU".Crime_Incident CI
+        INNER JOIN "SPABBATHI".IUCR I on I.Iucr_Code = CI.Iucr_Code
+        INNER JOIN "KONDURUS".LOCATION L ON L.Loc_Id = CI.Loc_Id
+        INNER JOIN "KONDURUS".DIVISION D ON L.Division_Id = D.Division_Id
+        INNER JOIN "KONDURUS".GEO_COORDINATES G on G.Geo_Id = L.Geo_Id 
+        INNER JOIN (
+            SELECT District_Id, District_Name, I.Latitude as District_Latitude, I.Longitude as District_Longitude 
+            FROM "SPABBATHI".DISTRICT H
+            INNER JOIN "KONDURUS".GEO_COORDINATES I on H.Geo_Id = I.Geo_Id
+            WHERE H.District_Name = '{0}'
+        ) J ON J.District_Id = D.District
+        WHERE LATITUDE IS NOT NULL AND LONGITUDE IS NOT NULL
+    ) K
+    WHERE K.YEAR IN ('2020', '2021', '2022', '2023')
+) L
+WHERE L.Distance <= {1}
+GROUP BY L.Year, L.Month
+ORDER BY L.Year, L.Month""",
+
+
     "trend3": """
 SELECT E.Full_Year AS Year, E.DayOfWeek AS Day, E.Primary_Description AS Crime_Type, COUNT(case_number) AS Number_Of_Crimes
 FROM (  
@@ -52,8 +88,36 @@ FROM (
 ) E
 WHERE E.DayOfWeek IN ({0}) AND E.Primary_Description = '{1}'
 GROUP BY E.Full_Year, E.DayOfWeek, E.Primary_Description
-ORDER BY E.Full_Year, E.DayOfWeek, E.Primary_Description"""
+ORDER BY E.Full_Year, E.DayOfWeek, E.Primary_Description""",
+
+
+    "trend5": """
+SELECT Time_Period, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes
+FROM (
+  SELECT CONCAT(CONCAT(A.Year, '-'), LPAD(A.Month, 2, '0')) AS Time_Period,
+         A.Crime_Id,
+         CASE  
+             WHEN A.HOUR BETWEEN 4 AND 11 THEN 'Morning'
+             WHEN A.HOUR BETWEEN 12 AND 19 THEN 'Evening'
+             ELSE 'Night' 
+         END AS Time_Interval,
+         CASE  
+             WHEN A.Index_Code='I' THEN 'Index Crime'
+             ELSE 'Non Index Crime'
+         END AS Crime_Category
+  FROM (
+    SELECT Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, EXTRACT(MONTH FROM time_stamp) as Month, EXTRACT(HOUR FROM time_stamp) as Hour, I.Index_Code
+    FROM "YARAVA.VENKATASU".Crime_Incident CI
+    INNER JOIN "SPABBATHI".IUCR I ON I.Iucr_Code=CI.Iucr_Code
+    ) A
+  WHERE A.Year IN ('2020', '2021', '2022', '2023')
+  ) B
+WHERE B.Crime_Category = '{0}'
+GROUP BY Time_Period, Time_Interval
+ORDER BY Time_Period, Time_Interval"""
 }
+
+
 
 locations_hierarchy = {
     "Residential Areas": [

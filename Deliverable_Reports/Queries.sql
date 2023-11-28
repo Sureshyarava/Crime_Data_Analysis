@@ -10,6 +10,37 @@ WHERE S.Season_name = 'summer' and I.Primary_Description in ('THEFT','CRIMINAL D
 GROUP BY C.Year, I.Primary_Description
 ORDER BY C.Year, I.Primary_Description;
 
+
+--Trend Query 2
+SELECT L.Year, L.Month, COUNT(L.Crime_Id) AS Number_Of_Crimes
+FROM (
+    SELECT K.Crime_Id, K.Year, K.Month,
+            6371 * ACOS( COS(K.Latitude/57.2957795) * COS(K.District_Latitude/57.2957795) *
+            COS(K.Longitude/57.2957795 - K.District_Longitude/57.2957795) +
+            SIN(K.Latitude/57.2957795) * SIN(K.District_Latitude/57.2957795)) AS Distance
+    FROM 
+    (
+        SELECT Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, EXTRACT(MONTH FROM time_stamp) as Month, G.Latitude, G.Longitude, J.District_Latitude, J.District_Longitude
+        FROM "YARAVA.VENKATASU".Crime_Incident CI
+        INNER JOIN "SPABBATHI".IUCR I on I.Iucr_Code = CI.Iucr_Code
+        INNER JOIN "KONDURUS".LOCATION L ON L.Loc_Id = CI.Loc_Id
+        INNER JOIN "KONDURUS".DIVISION D ON L.Division_Id = D.Division_Id
+        INNER JOIN "KONDURUS".GEO_COORDINATES G on G.Geo_Id = L.Geo_Id 
+        INNER JOIN (
+            SELECT District_Id, District_Name, I.Latitude as District_Latitude, I.Longitude as District_Longitude 
+            FROM "SPABBATHI".DISTRICT H
+            INNER JOIN "KONDURUS".GEO_COORDINATES I on H.Geo_Id = I.Geo_Id
+            WHERE H.District_Name = 'Bucktown'
+        ) J ON J.District_Id = D.District
+        WHERE LATITUDE IS NOT NULL AND LONGITUDE IS NOT NULL
+    ) K
+    WHERE K.YEAR IN ('2020', '2021', '2022', '2023')
+) L
+WHERE L.Distance <= 100.0
+GROUP BY L.Year, L.Month
+ORDER BY L.Year, L.Month;
+
+
 -- Trend Query 3
 SELECT E.Full_Year AS Year, E.DayOfWeek AS Day, E.Primary_Description AS Crime_Type, COUNT(case_number) AS Number_Of_Crimes
 FROM (  
@@ -39,3 +70,42 @@ FROM (
 WHERE E.DayOfWeek IN ('tuesday') AND E.Primary_Description = 'THEFT'
 GROUP BY E.Full_Year, E.DayOfWeek, E.Primary_Description
 ORDER BY E.Full_Year, E.DayOfWeek, E.Primary_Description;
+
+
+-- Trend 4 Location-Based Crime Analysis Trend
+SELECT C.Year, I.Primary_Description AS Crime_Type, count(C.Crime_Id) as Number_Of_Crimes
+FROM (
+  SELECT Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, I.Primary_Description
+  FROM "YARAVA.VENKATASU".Crime_Incident CI
+  INNER JOIN "SPABBATHI".IUCR I on I.Iucr_Code = CI.Iucr_Code
+  WHERE I.Primary_Description in ('THEFT','CRIMINAL DAMAGE') AND C.Year BETWEEN '2000' AND '2012'
+) C
+INNER JOIN "KONDURUS".Location L on C.Loc_Id = L.Loc_Id
+WHERE L.Loc_Description IN ('CTA "L" PLATFORM') 
+GROUP BY C.Year, I.Primary_Description
+ORDER BY C.Year, I.Primary_Description;
+
+-- Trend 5 : Dynamic Crime Analysis Trend
+SELECT Time_Period, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes
+FROM (
+  SELECT CONCAT(CONCAT(A.Year, '-'), LPAD(A.Month, 2, '0')) AS Time_Period,
+         A.Crime_Id,
+         CASE  
+             WHEN A.HOUR BETWEEN 4 AND 11 THEN 'Morning'
+             WHEN A.HOUR BETWEEN 12 AND 19 THEN 'Evening'
+             ELSE 'Night' 
+         END AS Time_Interval,
+         CASE  
+             WHEN A.Index_Code='I' THEN 'Index Crime'
+             ELSE 'Non Index Crime'
+         END AS Crime_Category
+  FROM (
+    SELECT Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, EXTRACT(MONTH FROM time_stamp) as Month, EXTRACT(HOUR FROM time_stamp) as Hour, I.Index_Code
+    FROM "YARAVA.VENKATASU".Crime_Incident CI
+    INNER JOIN "SPABBATHI".IUCR I ON I.Iucr_Code=CI.Iucr_Code
+    ) A
+  WHERE A.Year IN ('2020', '2021', '2022', '2023')
+  ) B
+WHERE B.Crime_Category = 'Index Crime'
+GROUP BY Time_Period, Time_Interval
+ORDER BY Time_Period, Time_Interval;

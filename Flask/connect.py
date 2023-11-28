@@ -47,12 +47,4 @@ class DbConnection:
             self.cursor.close()
         if self.conn:
             self.conn.close()
-    
 
-
-if __name__ == '__main__':
-    db_connection = DbConnection(db_username, db_password, db_conn_string)
-    db_connection.__connect__()
-    result = db_connection.execute_query("select * from employee")
-    db_connection.close()
-    print(result)
