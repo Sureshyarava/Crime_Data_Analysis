@@ -51,7 +51,7 @@ export default function Login() {
             <header className="header-login">
                 <nav>
                     <ul className="navbar-login">
-                        <li><h2>Analytics Sign in/up </h2></li>
+                        <li><h2>Sign in/Sign up </h2></li>
                         <div id="utility">
                         <li><a href="/">Home</a></li>
                         <li><a href="/document">Documentation</a></li>

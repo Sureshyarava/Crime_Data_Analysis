@@ -1,4 +1,4 @@
--- Trend Query 1
+-- Trend Query 1: Season-Based Crime Analysis Trend
 SELECT C.Year, I.Primary_Description AS Crime_Type, count(C.Crime_Id) as Number_Of_Crimes
 FROM (
   SELECT Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, EXTRACT(MONTH FROM time_stamp) as Month, Iucr_Code
@@ -41,7 +41,7 @@ GROUP BY L.Year, L.Month
 ORDER BY L.Year, L.Month;
 
 
--- Trend Query 3
+-- Trend Query 3: Day-wise Crime Analysis Trend
 SELECT E.Full_Year AS Year, E.DayOfWeek AS Day, E.Primary_Description AS Crime_Type, COUNT(case_number) AS Number_Of_Crimes
 FROM (  
     SELECT * FROM "YARAVA.VENKATASU".Week W
@@ -96,6 +96,7 @@ WHERE B.Location_Type IN ('Residential Areas', 'Commercial Areas', 'Educational 
 GROUP BY B.Year, B.Location_Type
 ORDER BY B.Year, B.Location_Type;
 
+
 -- Trend 5 : Dynamic Crime Analysis Trend
 SELECT Year, LPAD(Month, 2, '0') as Month, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes
 FROM (
@@ -123,7 +124,7 @@ GROUP BY Year, Month, Time_Interval
 ORDER BY Year, Month, Time_Interval;
 
 
--- Trend Query 6:
+-- Trend Query 6: Police Sentiment Trust Score AnalysisTrend
 SELECT B.Year, B.Demographic_Type, AVG(B.Demographic_Score) AS Demographic_Score
 FROM (
   SELECT A.Year,
