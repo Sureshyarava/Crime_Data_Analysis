@@ -97,7 +97,7 @@ GROUP BY B.Year, B.Location_Type
 ORDER BY B.Year, B.Location_Type;
 
 -- Trend 5 : Dynamic Crime Analysis Trend
-SELECT Year, Month, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes
+SELECT Year, LPAD(Month, 2, '0') as Month, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes
 FROM (
   SELECT A.Year,
          A.Month,
