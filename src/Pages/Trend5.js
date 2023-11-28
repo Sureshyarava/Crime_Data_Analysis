@@ -36,7 +36,10 @@ export default function Trend5() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
+        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational 
+          and educational purposes only. The analysis and trends presented in this report are based on publicly 
+          available crime data and are subject to 
+          the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   )
@@ -105,6 +108,10 @@ function MainPage() {
 
       <div className="content">
         <h1 className="element">Dynamic Crime Analysis Trend</h1>
+        <h4>
+This crime trend analysis delves into evolving crime types, 
+emphasizing specific time intervals for customized exploration 
+of rates in user-defined locations, visualized through a line chart.</h4>
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />

@@ -36,7 +36,10 @@ export default function Trend6() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
+        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational 
+          and educational purposes only. The analysis and trends presented in this report are based on publicly 
+          available crime data and are subject 
+          to the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   )
@@ -95,13 +98,15 @@ function MainPage() {
       <header className="trend">
         <nav>
           <ul className="navbar-trend">
-            <li><h1>Police Sentiment Analysis Trend</h1></li>
+            {/* <li><h1>Police Sentiment Analysis Trend</h1></li> */}
           </ul>
         </nav>
       </header>
 
       <div className="content">
-        <h1 className="element">Analysis of Trend Data</h1>
+        <h1 className="element">Police Sentiment Analysis Trend</h1>
+        <h4>This crime trend analysis explores historical patterns, aiding law enforcement and policymakers in making informed 
+          decisions through a multi-line chart mapping police sentiment scores over time.</h4>
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />

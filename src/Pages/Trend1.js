@@ -111,9 +111,12 @@ function MainPage() {
           </ul>
         </nav>
       </header>
-
+      
       <div className="content">
         <h1 className="element">Season-Based Crime Analysis Trend</h1>
+        <h4> 
+This analysis examines seasonal crime trends over multiple years, providing insights 
+into patterns and facilitating informed decisions for enhanced safety. </h4>
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />

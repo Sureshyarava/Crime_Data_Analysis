@@ -35,7 +35,10 @@ export default function Trend3() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
+        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational
+           and educational purposes only. The analysis and trends presented in this report are based 
+           on publicly available crime data and are 
+          subject to the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   );
@@ -113,6 +116,9 @@ function MainPage() {
       <div className="content">
       
         <h1 className="element">Day-wise Crime Analysis Trend</h1>
+        <h4>
+This crime trend analysis examines historical patterns, emphasizing days of the week. 
+Informed by a multi-line chart, it aids resource optimization for law enforcement and policymakers.</h4>
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />

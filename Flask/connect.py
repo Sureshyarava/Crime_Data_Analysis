@@ -4,8 +4,8 @@ import oracledb
 
 class DbConnection:
     def __init__(self):
-        self.username = os.environ.get('ORACLE_DB_USERNAME')
-        self.pwd = os.environ.get('ORACLE_DB_PASSWORD')
+        self.username = "SPABBATHI"
+        self.pwd = "7xebbTfq4PM6Lj3MMYqEm6OD"
         self.conn_string = "oracle.cise.ufl.edu:1521/orcl"
         self.conn = None
         self.cursor = None
