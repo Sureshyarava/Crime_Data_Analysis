@@ -133,7 +133,6 @@ function MainPage() {
                 <option value="KIDNAPPING">KIDNAPPING</option>
                 <option value="NARCOTICS">NARCOTICS</option>
                 <option value="OTHER OFFENSE">OTHER OFFENSE</option>
-                <option value="RITUALISM">RITUALISM</option>
                 <option value="ARSON">ARSON</option>
                 <option value="DECEPTIVE PRACTICE">DECEPTIVE PRACTICE</option>
                 <option value="SEX OFFENSE">SEX OFFENSE</option>
