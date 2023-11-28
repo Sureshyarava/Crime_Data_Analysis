@@ -35,7 +35,6 @@ export default function Trend3() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
       </div>
     </div>
   );
@@ -113,6 +112,12 @@ function MainPage() {
       <div className="content">
       
         <h1 className="element">Day-wise Crime Analysis Trend</h1>
+        <h4>
+        This trend analyses crime incidents for specified crime type and which occured on specified days of week.
+        </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
@@ -156,6 +161,7 @@ function MainPage() {
                 <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
               </select>
               <br />
+              <br></br><br></br>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
   <label style={{ display: 'inline', marginRight: '10px' }}>
     Monday
@@ -221,7 +227,7 @@ function MainPage() {
     />
   </label>
 </div>
-
+<br></br>
               <input type="submit" value="Submit" style={{ background: "blue", color: "white", borderRadius: "3px" }} />
             </form>
           </div>

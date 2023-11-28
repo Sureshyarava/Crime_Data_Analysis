@@ -38,10 +38,6 @@ export default function Trend1() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational 
-          and educational purposes only. The analysis and trends presented in this report are based on publicly 
-          available crime data and are 
-          subject to the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   )
@@ -111,14 +107,22 @@ function MainPage() {
           </ul>
         </nav>
       </header>
-
+      
       <div className="content">
         <h1 className="element">Season-Based Crime Analysis Trend</h1>
+        <h4>
+        This trend analyses crime incidents for specified crime types and which occured during specified season.
+        </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
             <form style={{ backgroundColor: "#F3F5F9", display: "flex", flexDirection: "column" }} onSubmit={handleSubmit}>
-            <strong><h2>Select a Specific Season </h2> </strong>
+            <br></br>
+            <br></br>
+            <label>Select a specific season: </label>
             <br></br>
             <div style={{ display: "flex", flexDirection: "row" }}>
                 <label style={{ marginRight: "10px" }}></label>
@@ -134,6 +138,7 @@ function MainPage() {
                 <input type="radio" id="spring" name="season" value="spring" style={{ marginLeft: "20px" }} />
                 <label htmlFor="spring">Spring</label>
             </div>
+              <br></br>
               <br></br>
               <label htmlFor="dropdown">Select atmost 3 crime types :</label>
               <br />
@@ -172,6 +177,7 @@ function MainPage() {
                 <option value="MOTOR VEHICLE THEFT">MOTOR VEHICLE THEFT</option>
                 <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
               </select>
+              <br></br>
               <input type="submit" value="Submit" style={{ background: "blue", color: "white", borderRadius: "3px" }} />
             </form>
           </div>

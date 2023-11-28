@@ -39,7 +39,6 @@ export default function Trend2() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
       </div>
     </div>
   )
@@ -109,7 +108,13 @@ function MainPage() {
       </header>
 
       <div className="content">
-        <h1 className="element">Geographical Analysis of Safety and Security Trend</h1>
+        <h1 className="element">Geographical Crime Analysis Trend</h1>
+        <h4>
+        This trend analyses crime incidents occured in the specified district of Chicago City and within specified radius.
+        </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
@@ -119,7 +124,6 @@ function MainPage() {
               <br />
               <select id="dropdown" name="dropdown">
               <option value="Hyde Park">Hyde Park</option>
-                <option value="HOMICIDE">HOMICIDE</option>
                 <option value="River North">River North</option>
                 <option value="West Loop">West Loop</option>
                 <option value="Irving Park">Irving Park</option>

@@ -36,7 +36,6 @@ export default function Trend6() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
       </div>
     </div>
   )
@@ -95,13 +94,19 @@ function MainPage() {
       <header className="trend">
         <nav>
           <ul className="navbar-trend">
-            <li><h1>Police Sentiment Analysis Trend</h1></li>
+            {/* <li><h1>Police Sentiment Analysis Trend</h1></li> */}
           </ul>
         </nav>
       </header>
 
       <div className="content">
-        <h1 className="element">Analysis of Trend Data</h1>
+        <h1 className="element">Police Sentiment Trust Score AnalysisTrend</h1>
+        <h4>
+        This trend analyses police sentiment trust score within selected demographic type.
+        </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />

@@ -9,7 +9,8 @@ valid_input_params = {
     'trend2': ["district_name", "radius"],
     'trend3': ["day_of_week", "crime_type"],
     'trend4': ["location_type"],
-    'trend5': ["crime_category"]
+    'trend5': ["crime_category"],
+    'trend6': ["demographic_type"]
 }
 
 query_list = {
@@ -140,6 +141,29 @@ FROM (
   ) B
 WHERE B.Crime_Category = '{0}'
 GROUP BY Time_Period, Time_Interval
-ORDER BY Time_Period, Time_Interval"""
+ORDER BY Time_Period, Time_Interval""",
+
+
+    "trend6": """
+SELECT B.Year, B.Demographic_Type, AVG(B.Demographic_Score) AS Demographic_Score
+FROM (
+  SELECT A.Year,
+         A.Demographic_Type,
+         CASE  
+             WHEN A.Demographic_Type IN ('Age_Low', 'Age_Medium', 'Age_High') THEN 'Age'
+             WHEN A.Demographic_Type IN ('Income_Low', 'Income_Medium', 'Income_High') THEN 'Income'
+             WHEN A.Demographic_Type IN ('Male', 'Female') THEN 'Gender'
+             WHEN A.Demographic_Type IN ('Education_Low', 'Education_Medium', 'Education_High') THEN 'Education'
+             WHEN A.Demographic_Type IN ('White', 'African_American', 'Asian_American', 'Hispanic', 'Other') THEN 'Race'
+             ELSE 'Trust'
+         END AS Demographic_Type_0,
+        Demographic_Score
+  FROM (
+    SELECT Demographic_Type, TO_CHAR(PERIOD, 'YYYY') AS Year, DEMOGRAPHIC_SCORE
+    FROM "KONDURUS".police_sentiment_score ) A
+) B
+WHERE B.Demographic_Type_0 = '{0}'
+GROUP BY B.Year, B.Demographic_Type
+ORDER BY B.Year, B.Demographic_Type"""
 
 }

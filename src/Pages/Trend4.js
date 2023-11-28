@@ -36,7 +36,6 @@ export default function Trend4() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer</p></footer>
       </div>
     </div>
   )
@@ -106,6 +105,12 @@ function MainPage() {
 
       <div className="content">
         <h1 className="element">Location-Based Crime Analysis Trend</h1>
+        <h4>
+        This trend analyses crime incidents for specified crime type and which occured in specified type of location (like Residential Areas, Government and Public Facilities etc).
+        </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
