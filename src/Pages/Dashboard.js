@@ -43,9 +43,12 @@ export default function Dashboard() {
                 </header>
                 <div className="image-container img">
                     <img src={image1} alt="Trend slide show" style={{ width: "100%", marginTop: "10%" }} />
+                    <p> we can create a slide show of past responses that the application is generating </p>
                 </div>
                 <footer id="footer" style={{ marginLeft: "20%" }}>
-                    <p>Disclaimer: This project, "Crime Data Analysis for Safer Communities," is intended for informational and educational purposes only. The analysis and trends presented in this report are based on publicly available crime data and are subject to the limitations and accuracy of the data sources.</p>
+                    <p>Disclaimer: This project is intended for informational and educational purposes only.
+                     The analysis and trends presented in this report are based on publicly available crime data
+                    and are subject to the limitations and accuracy of the data sources.</p>
         </footer>
             </div>
         </div>

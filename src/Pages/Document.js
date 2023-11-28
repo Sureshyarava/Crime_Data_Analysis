@@ -12,7 +12,7 @@ export default function Document() {
             <header>
                 <nav>
                     <ul className="navbar">
-                        <li><h1>Analytics</h1></li>
+                        <li ><a href="/dashboard">Chicago Crime Analysis</a></li>
                         <div id="utility">
                             
                             <li><a href="/about">About</a></li>

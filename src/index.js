@@ -15,6 +15,7 @@ import Trend4 from './Pages/Trend4';
 import Trend5 from './Pages/Trend5';
 import Trend6 from './Pages/Trend6';
 import Document from './Pages/Document';
+import About from './Pages/About';
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/about",
+    element: <About />
   },
   {
     path: "/dashboard",
