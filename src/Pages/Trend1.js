@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 // import chart from "../chart.png";
 import '../Css/trend.css';
-import Plot from "./Plotcopy";
+import Plot from "./Plot3";
 import getCookie from "./GetCookieJs";
 import handleLogout from "./HandleLogoutJs";
 

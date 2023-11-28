@@ -55,9 +55,9 @@ function MainPage() {
   const handleSubmit = (event) => {
     const dropdownValue = document.getElementById("dropdown").value;
     event.preventDefault();
-    const url = 'http://127.0.0.1:5000/trend1';
+    const url = 'http://127.0.0.1:5000/trend5';
     const requestData = {
-      "trend_name" : "trend1",
+      "trend_name" : "trend5",
        "params": {
         "crime_type" : dropdownValue
       }
@@ -78,10 +78,13 @@ function MainPage() {
         return response.json();
       })
       .then((data) => {
+
+        const apdata = segregateData(data)
         
         // Store the fetched data in state
-        setApiData(data);
+        setApiData(apdata);
         // Toggle divs to hide input and show the plot
+        console.log(apdata);
         toggleDivs();
       })
       .catch((error) => {
@@ -155,4 +158,32 @@ function MainPage() {
       </div>
     </div>
   );
+}
+
+
+function segregateData(data) {
+  if (!data) {
+    console.error('Data is null or undefined');
+    return null;
+  }
+
+  const segregatedData = {};
+
+  // Iterate over the data and segregate based on crime type
+  data.forEach(entry => {
+    const day = entry.DAY;
+
+    // If the crime type doesn't exist in segregatedData, create an empty array
+    if (!segregatedData[day]) {
+      segregatedData[day] = [];
+    }
+
+    // Push an object with only "NUMBER_OF_CRIMES" and "YEAR" properties
+    segregatedData[day].push({
+      NUMBER_OF_CRIMES: entry.NUMBER_OF_CRIMES,
+      YEAR: entry.YEAR,
+    });
+  });
+
+  return segregatedData;
 }
