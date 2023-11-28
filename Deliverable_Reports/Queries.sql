@@ -73,17 +73,28 @@ ORDER BY E.Full_Year, E.DayOfWeek, E.Primary_Description;
 
 
 -- Trend 4 Location-Based Crime Analysis Trend
-SELECT C.Year, I.Primary_Description AS Crime_Type, count(C.Crime_Id) as Number_Of_Crimes
+SELECT B.Year, B.Location_Type, count(B.Crime_Id) as Number_Of_Crimes
 FROM (
-  SELECT Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, I.Primary_Description
-  FROM "YARAVA.VENKATASU".Crime_Incident CI
-  INNER JOIN "SPABBATHI".IUCR I on I.Iucr_Code = CI.Iucr_Code
-  WHERE I.Primary_Description in ('THEFT','CRIMINAL DAMAGE') AND C.Year BETWEEN '2000' AND '2012'
-) C
-INNER JOIN "KONDURUS".Location L on C.Loc_Id = L.Loc_Id
-WHERE L.Loc_Description IN ('CTA "L" PLATFORM') 
-GROUP BY C.Year, I.Primary_Description
-ORDER BY C.Year, I.Primary_Description;
+  SELECT A.Crime_Id, A.Year, 
+         CASE  
+             WHEN A.Loc_Description IN ('RESIDENCE - YARD (FRONT / BACK)', 'RESIDENCE - PORCH / HALLWAY', 'RESIDENCE - GARAGE', 'RESIDENCE PORCH/HALLWAY', 'RESIDENCE-GARAGE', 'RESIDENCE - PORCH / HALLWAY') THEN 'Residential Areas'
+             WHEN A.Loc_Description IN ('PARKING LOT / GARAGE (NON RESIDENTIAL)', 'SMALL RETAIL STORE', 'RESTAURANT', 'COMMERCIAL / BUSINESS OFFICE', 'GAS STATION', 'DEPARTMENT STORE', 'GROCERY FOOD STORE', 'BAR OR TAVERN', 'CONVENIENCE STORE', 'DRUG STORE') THEN 'Commercial Areas'
+             WHEN A.Loc_Description IN ('COLLEGE / UNIVERSITY - RESIDENCE HALL', 'SCHOOL - PRIVATE BUILDING', 'SCHOOL - PUBLIC GROUNDS', 'SCHOOL, PRIVATE, BUILDING', 'SCHOOL, PRIVATE, GROUNDS', 'SCHOOL, PUBLIC, BUILDING', 'SCHOOL, PUBLIC, GROUNDS', 'COLLEGE / UNIVERSITY - GROUNDS') THEN 'Educational Institutions'
+             WHEN A.Loc_Description IN ('SIDEWALK', 'VEHICLE NON-COMMERCIAL', 'CTA TRAIN', 'CTA BUS', 'CTA PLATFORM', 'CHA PARKING LOT / GROUNDS', 'GOVERNMENT BUILDING / PROPERTY', 'CTA STATION', 'VEHICLE - COMMERCIAL', 'CTA PARKING LOT / GARAGE / OTHER PROPERTY') THEN 'Transportation Areas'
+             WHEN A.Loc_Description IN ('NURSING / RETIREMENT HOME', 'MEDICAL / DENTAL OFFICE', 'ANIMAL HOSPITAL', 'NURSING HOME/RETIREMENT HOME', 'HOSPITAL', 'HOSPITAL BUILDING / GROUNDS') THEN 'Healthcare Facilities'
+             WHEN A.Loc_Description IN ('POLICE FACILITY', 'GOVERNMENT BUILDING / PROPERTY', 'FEDERAL BUILDING', 'COUNTY JAIL', 'POLICE FACILITY / VEHICLE PARKING LOT', 'OTHER RAILROAD PROPERTY / TRAIN DEPOT', 'GOVERNMENT BUILDING / PROPERTY', 'FIRE STATION', 'LIBRARY', 'GOVERNMENT BUILDING / PROPERTY', 'CTA PROPERTY', 'GOVERNMENT BUILDING/PROPERTY') THEN 'Government and Public Facilities'
+             ELSE 'Miscellaneous Location'
+         END AS Location_Type
+  FROM (
+    SELECT C.Crime_Id, EXTRACT(YEAR FROM time_stamp) as Year, L.Loc_Description
+    FROM "YARAVA.VENKATASU".Crime_Incident C
+    INNER JOIN "KONDURUS".Location L on C.Loc_Id = L.Loc_Id
+  ) A
+  WHERE A.Year BETWEEN '2020' AND '2023'
+) B
+WHERE B.Location_Type IN ('Residential Areas', 'Commercial Areas', 'Educational Institutions', 'Transportation Areas', 'Healthcare Facilities', 'Government and Public Facilities' )
+GROUP BY B.Year, B.Location_Type
+ORDER BY B.Year, B.Location_Type;
 
 -- Trend 5 : Dynamic Crime Analysis Trend
 SELECT Time_Period, Time_Interval, COUNT(Crime_Id) AS Number_Of_Crimes

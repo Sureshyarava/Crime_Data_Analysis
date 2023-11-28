@@ -158,6 +158,29 @@ def get_trend3():
         return jsonify({'Error' : str(e)})
 
 
+@app.route('/trend4', methods=['POST'])
+def get_trend4():
+    try:
+        data = request.json
+        trend_name = data.get('trend_name')
+        input_params = data['params']
+        if not trend_name:
+            raise Exception("Trend Name is mandatory in payload")
+        for param in input_params:
+            if param not in valid_input_params[trend_name]:
+                raise Exception("One or more input param provided is not valid for {}".format(trend_name))
+        db_connection = DbConnection()
+        db_connection.__connect__()
+        query = query_list.get(trend_name)
+        query = query.format(str(input_params['location_type']).replace(']','').replace('[','').replace('"','\''))
+        logger.info(query)
+        result = db_connection.execute_query(query)
+        return jsonify(result)
+    except Exception as e:
+        logger.error(str(e))
+        return jsonify({'Error' : str(e)})
+
+
 @app.route('/trend5', methods=['POST'])
 def get_trend5():
     try:
