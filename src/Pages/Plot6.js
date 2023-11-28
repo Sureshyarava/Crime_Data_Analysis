@@ -333,8 +333,8 @@ const Plot3 = ({ apdata }) => {
                 display: true,
                 text: 'Years'
               },
-              max : 2024,
-              min : 2016
+              max : 2023,
+              min : 2017
             },
             y: {
               type: 'linear',
