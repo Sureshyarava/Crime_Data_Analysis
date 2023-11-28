@@ -1,14 +1,15 @@
 import React from "react";
-import image1 from './image1.png';
 
 export default function MainContent(){
     return(
     <div class="content">
-        <h1>Trend Analysis of Data</h1>
-            <div class="image-container img">
-                <img src={image1} alt="Trend slide show" style={{width:"100%"}}/>
-                <p>Please add a button to count all the rows in all the tables</p>
-            </div>
+        <h1> Welcome to Crime Data Analysis </h1>
+        <br></br><br></br><br></br><br></br><br></br>
+        <h2>Empowering Safer Communities Through Data-Driven Insights</h2>
+        <br></br><br></br><br></br>
+        <h3>Crime Data Analysis involve analysis of various crimes in different scenarios over the past few years, through dynamic graphs and charts. </h3>
+        <br></br><br></br>
+        <h3>The goal of is to provide a comprehensive solution that transforms raw crime data into actionable insights, enabling smarter decision-making for law enforcement agencies, policymakers, and communities.</h3>
     </div>
     )
 }

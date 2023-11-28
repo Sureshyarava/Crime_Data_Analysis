@@ -21,7 +21,7 @@ export default function Home() {
             <header>
                 <nav>
                     <ul className="navbar">
-                        <li><h1>Chicago Crime Analysis </h1></li>
+                        <li><h1>Crime Data Analysis </h1></li>
                         <div id="utility">
                             <li><a href="/document">Documentation</a></li>
                             <li><a href="/about">About</a></li>

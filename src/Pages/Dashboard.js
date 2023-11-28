@@ -1,6 +1,5 @@
 import React,{useState} from "react";
 import '../Css/dashboard.css';
-import image1 from '../image1.png';
 import getCookie from "./GetCookieJs";
 import handleLogout from "./HandleLogoutJs";
 export default function Dashboard() {
@@ -41,10 +40,16 @@ export default function Dashboard() {
                         </ul>
                     </nav>
                 </header>
-                <div className="image-container img">
-                    <img src={image1} alt="Trend slide show" style={{ width: "100%", marginTop: "10%" }} />
-                    <p> we can create a slide show of past responses that the application is generating </p>
+                <div class="content">
+                <h1>Welcome to Your Dashboard</h1>
+                <br></br><br></br><br></br>
+                <h4>Designed to provide a comprehensive overview of crime trends, our dashboard transforms raw data into actionable information. </h4>
+                <br></br>
+                <h4>Whether you're a law enforcement professional or concerned citizen, this dashboard helps you make informed decisions and contribute to building safer communities.</h4>
+                <br></br>
+                <h4>Navigate through the interactive trends to visualize crime data over past few years.</h4>
                 </div>
+                
                 <footer id="footer" style={{ marginLeft: "20%" }}>
                     <p>Disclaimer: This project is intended for informational and educational purposes only.
                      The analysis and trends presented in this report are based on publicly available crime data

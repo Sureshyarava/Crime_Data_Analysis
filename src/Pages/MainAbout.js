@@ -22,20 +22,22 @@ export default function MainAbout() {
   return (
     <div className="content">
       <h1>About Us </h1>
-      <br></br>
-      <h2> Crime Data Analysis for Safer Communities</h2>
-      <br></br>
-      <h3>UNIVERSITY OF FLORIDA </h3>
+      <br></br><br></br>
+      <h2>UNIVERSITY OF FLORIDA </h2>
       <br></br>
       <h2><storng>Computer and Information Science and Engineering</storng></h2>
-      <br></br>
+      <br></br><br></br><br></br>
       <h2>[COP5725] - Database Management Systems</h2>
       <br></br>
-      <h1>Instructor: Dr. Markus Schneider</h1>
-      <br></br>
+      <h2>Instructor: Dr. Markus Schneider</h2>
+      <br></br><br></br><br></br>
+      <h2> Crime Data Analysis for Safer Communities</h2>
+      <br></br><br></br><br></br>
       <h3>Project Group : 18</h3>
-      <br></br>
-            
+      <br></br><br></br>
+      
+
+      <h3>Group Members</h3><br></br>
       <table style={tableStyle}>
         <thead>
           <tr>
