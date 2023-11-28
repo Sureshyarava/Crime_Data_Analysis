@@ -115,7 +115,11 @@ const handleRadioChange = (type) => {
         <h4>
           This trend analyses crime incidents for specified crime category and which occured during different time of a day.
         </h4>
+        <br /><br />
+        <h4>Index crimes, are the seven crimes originally chosen by the FBI to be included in their measure of crimes as these offenses were both considered serious and generally well-reported so would be a useful measure of crime. </h4>
         <br />
+        <h4>Index crimes are often broken down into property index crimes (burglary, theft, and motor vehicle theft) and violent index crimes (murder, rape, robbery, and aggravated assault).</h4>
+        <br /><br />
         <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
         <br /><br />
         <div className="content-container">
