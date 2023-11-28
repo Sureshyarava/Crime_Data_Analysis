@@ -208,7 +208,8 @@ function combineYearMonth(data) {
 
     return {
       TIME_PERIOD : combinedDate,
-      NUMBER_OF_CRIMES: entry.NUMBER_OF_CRIMES
+      NUMBER_OF_CRIMES: entry.NUMBER_OF_CRIMES,
+      TIME_INTERVAL: entry.TIME_INTERVAL
     };
   });
 }
