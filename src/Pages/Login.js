@@ -11,7 +11,6 @@ export default function Login() {
 
     if (emailInput.value === "" || passwordInput.value === "") {
       alert("Email or password should not be null");
-      window.location.href = "./login";
       return false;
     }
 
@@ -33,6 +32,7 @@ export default function Login() {
     };
 
     setCookie("authToken", "656U345", 6);
+    window.location.href = "./dashboard";
 
     fetch(url, requestOptions)
     .then((response) => {
@@ -79,7 +79,7 @@ export default function Login() {
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form  id= "form" action="./dashboard">
+                    <form  id= "form" >
                         <h1>Sign in</h1>
                         <span>or use your account</span>
                         <input id= "email" type="email" placeholder="Email" />
