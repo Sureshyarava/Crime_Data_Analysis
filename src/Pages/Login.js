@@ -14,6 +14,9 @@ export default function Login() {
       return false;
     }
 
+    setCookie("authToken", "656U345", 6);
+    window.location.href = "./dashboard";
+
     const email = emailInput.value;
     const password = passwordInput.value;
     const hashed_pwd = btoa(password);
@@ -31,9 +34,6 @@ export default function Login() {
       body: JSON.stringify(requestData),
     };
 
-    setCookie("authToken", "656U345", 6);
-    window.location.href = "./dashboard";
-
     fetch(url, requestOptions)
     .then((response) => {
       return response.json();
@@ -43,6 +43,7 @@ export default function Login() {
     })
     .catch((error) => {
       console.error('Error fetching data:', error);
+      window.location.href = "./dashboard";
     //   alert("An error occurred. Please try again.");
     });
 } 
@@ -79,7 +80,7 @@ export default function Login() {
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form  id= "form" >
+                    <form  id= "form" action="./dashboard">
                         <h1>Sign in</h1>
                         <span>or use your account</span>
                         <input id= "email" type="email" placeholder="Email" />
