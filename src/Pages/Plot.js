@@ -25,8 +25,8 @@ const Plot = ({ apdata }) => {
     return null; 
   }
 
-  const label = apdata.map(entry => entry.YEAR);
-  const dataPoints = apdata.map(entry => entry.CRIME_COUNT);
+  const label = apdata.map(entry => entry.DATE);
+  const dataPoints = apdata.map(entry => entry.NUMBER_OF_CRIMES);
 
   const maxDataPoints = Math.max(dataPoints)
 
@@ -35,7 +35,7 @@ const Plot = ({ apdata }) => {
   const dataset = {
     labels: label,
     datasets: [{
-      labels: 'Years',
+      labels: 'Yeard',
       data: dataPoints,
       backgroundColor: "aqua",
       borderColor: 'black'
@@ -54,9 +54,7 @@ const Plot = ({ apdata }) => {
         title: {
           display: true,
           text: 'Time', // X-axis label
-        },
-        min : 2001,
-        max : 2024
+        }
       },
       y: {
         title: {

@@ -4,6 +4,8 @@ import '../Css/trend.css';
 import Plot from "./Plot";
 import getCookie from "./GetCookieJs";
 import handleLogout from "./HandleLogoutJs";
+import Slider from '@mui/material/Slider';
+import Typography from '@mui/material/Typography';
 
 
 export default function Trend2() {
@@ -47,6 +49,7 @@ function MainPage() {
   const [showInput, setShowInput] = useState(true);
   const [showPlot, setShowPlot] = useState(false);
   const [apiData, setApiData] = useState(null);
+  const [radiusValue, setRadiusValue] = useState(10);
 
   const toggleDivs = () => {
     setShowInput(!showInput);
@@ -56,11 +59,12 @@ function MainPage() {
   const handleSubmit = (event) => {
     const dropdownValue = document.getElementById("dropdown").value;
     event.preventDefault();
-    const url = 'http://127.0.0.1:5000/trend1';
+    const url = 'http://127.0.0.1:5000/trend2';
     const requestData = {
-      "trend_name": "trend1",
+      "trend_name": "trend2",
       "params": {
-        "crime_type": dropdownValue
+        "district_name": dropdownValue,
+        "radius" : parseFloat(radiusValue)
       }
     };
     const requestOptions = {
@@ -79,9 +83,12 @@ function MainPage() {
         return response.json();
       })
       .then((data) => {
+        const apdata = combineYearMonth(data);
+
+        console.log(apdata);
 
         // Store the fetched data in state
-        setApiData(data);
+        setApiData(apdata);
         // Toggle divs to hide input and show the plot
         toggleDivs();
       })
@@ -108,44 +115,28 @@ function MainPage() {
             <br />
             <br />
             <form style={{ backgroundColor: "#F3F5F9", display: "flex" }} onSubmit={handleSubmit}>
-              <label htmlFor="dropdown">Select the crime type:</label>
+              <label htmlFor="dropdown">Select the district:</label>
               <br />
               <select id="dropdown" name="dropdown">
-                <option value="ROBBERY">ROBBERY</option>
+              <option value="Hyde Park">Hyde Park</option>
                 <option value="HOMICIDE">HOMICIDE</option>
-                <option value="CRIMINAL DAMAGE">CRIMINAL DAMAGE</option>
-                <option value="CRIMINAL TRESPASS">CRIMINAL TRESPASS</option>
-                <option value="KIDNAPPING">KIDNAPPING</option>
-                <option value="NARCOTICS">NARCOTICS</option>
-                <option value="OTHER OFFENSE">OTHER OFFENSE</option>
-                <option value="RITUALISM">RITUALISM</option>
-                <option value="ARSON">ARSON</option>
-                <option value="DECEPTIVE PRACTICE">DECEPTIVE PRACTICE</option>
-                <option value="SEX OFFENSE">SEX OFFENSE</option>
-                <option value="BATTERY">BATTERY</option>
-                <option value="CONCEALED CARRY LICENSE VIOLATION">CONCEALED CARRY LICENSE VIOLATION</option>
-                <option value="PROSTITUTION">PROSTITUTION</option>
-                <option value="OBSCENITY">OBSCENITY</option>
-                <option value="CRIMINAL ABORTION">CRIMINAL ABORTION</option>
-                <option value="ASSAULT">ASSAULT</option>
-                <option value="CRIMINAL SEXUAL ASSAULT">CRIMINAL SEXUAL ASSAULT</option>
-                <option value="THEFT">THEFT</option>
-                <option value="GAMBLING">GAMBLING</option>
-                <option value="OTHER NARCOTIC VIOLATION">OTHER NARCOTIC VIOLATION</option>
-                <option value="WEAPONS VIOLATION">WEAPONS VIOLATION</option>
-                <option value="HUMAN TRAFFICKING">HUMAN TRAFFICKING</option>
-                <option value="PUBLIC INDECENCY">PUBLIC INDECENCY</option>
-                <option value="LIQUOR LAW VIOLATION">LIQUOR LAW VIOLATION</option>
-                <option value="INTERFERENCE WITH PUBLIC OFFICER">INTERFERENCE WITH PUBLIC OFFICER</option>
-                <option value="INTIMIDATION">INTIMIDATION</option>
-                <option value="PUBLIC PEACE VIOLATION">PUBLIC PEACE VIOLATION</option>
-                <option value="NON-CRIMINAL">NON-CRIMINAL</option>
-                <option value="STALKING">STALKING</option>
-                <option value="BURGLARY">BURGLARY</option>
-                <option value="MOTOR VEHICLE THEFT">MOTOR VEHICLE THEFT</option>
-                <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
+                <option value="River North">River North</option>
+                <option value="West Loop">West Loop</option>
+                <option value="Irving Park">Irving Park</option>
+                <option value="Uptown">Uptown</option>
+                <option value="Loop">Loop</option>
+                <option value="Bridgeport">Bridgeport</option>
+                <option value="Wrigleyville">Wrigleyville</option>
+                <option value="Lakeview">Lakeview</option>
+                <option value="Lincoln Park">Lincoln Park</option>
               </select>
-              <br />
+              <br />  
+
+
+              <SliderComponent onSliderChange={setRadiusValue} />
+
+
+
               <input type="submit" value="Submit" style={{ background: "blue", color: "white", borderRadius: "3px" }} />
             </form>
           </div>
@@ -156,4 +147,43 @@ function MainPage() {
       </div>
     </div>
   );
+}
+
+
+const SliderComponent = () => {
+  const [value, setValue] = useState(10);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div style={{ width: '300px', margin: '20px' }}>
+      <Typography id="range-slider" gutterBottom>
+        Select Radius (in kilo meters)
+      </Typography>
+      <Slider
+        value={value}
+        onChange={handleChange}
+        valueLabelDisplay="auto"
+        valueLabelFormat={(value) => `${value}km`}
+        min={10}
+        max={100}
+        step={1}
+      />
+    </div>
+  );
+};
+
+
+
+function combineYearMonth(data) {
+  return data.map(entry => {
+    const combinedDate =  entry.MONTH.toString() + "-" +entry.YEAR.toString();
+
+    return {
+      DATE: combinedDate,
+      NUMBER_OF_CRIMES: entry.NUMBER_OF_CRIMES
+    };
+  });
 }
