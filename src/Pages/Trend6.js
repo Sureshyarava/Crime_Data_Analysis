@@ -36,10 +36,6 @@ export default function Trend6() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational 
-          and educational purposes only. The analysis and trends presented in this report are based on publicly 
-          available crime data and are subject 
-          to the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   )
@@ -104,9 +100,13 @@ function MainPage() {
       </header>
 
       <div className="content">
-        <h1 className="element">Police Sentiment Analysis Trend</h1>
-        <h4>This crime trend analysis explores historical patterns, aiding law enforcement and policymakers in making informed 
-          decisions through a multi-line chart mapping police sentiment scores over time.</h4>
+        <h1 className="element">Police Sentiment Trust Score AnalysisTrend</h1>
+        <h4>
+        This trend analyses police sentiment trust score within selected demographic type.
+        </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />

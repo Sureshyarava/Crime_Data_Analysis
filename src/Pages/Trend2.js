@@ -39,11 +39,6 @@ export default function Trend2() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational
-           and educational
-           purposes only. The analysis and trends presented in this report are based 
-           on publicly available crime data and are subject to the limitations and 
-           accuracy of the data sources.</p></footer>
       </div>
     </div>
   )
@@ -113,11 +108,13 @@ function MainPage() {
       </header>
 
       <div className="content">
-        <h1 className="element">Geographical Analysis of Safety and Security Trend</h1>
+        <h1 className="element">Geographical Crime Analysis Trend</h1>
         <h4>
-        The current crime trend analysis scrutinizes recent incidents in a defined area, offering insights into safety dynamics.
-        Utilizing a heatmap enhances data-driven decision-making for public safety improvement.
+        This trend analyses crime incidents occured in the specified district of Chicago City and within specified radius.
         </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
@@ -127,7 +124,6 @@ function MainPage() {
               <br />
               <select id="dropdown" name="dropdown">
               <option value="Hyde Park">Hyde Park</option>
-                <option value="HOMICIDE">HOMICIDE</option>
                 <option value="River North">River North</option>
                 <option value="West Loop">West Loop</option>
                 <option value="Irving Park">Irving Park</option>

@@ -36,10 +36,6 @@ export default function Trend4() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for
-           informational and educational purposes only. The analysis and trends presented in this report
-            are based on publicly available crime data and are 
-          subject to the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   )
@@ -106,9 +102,11 @@ function MainPage() {
       <div className="content">
         <h1 className="element">Location-Based Crime Analysis Trend</h1>
         <h4>
-        This trend focuses on location-based crime analysis, 
-        highlighting hotspots such as hospitals, schools, and commercial building areas.
+        This trend analyses crime incidents for specified crime type and which occured in specified type of location (like Residential Areas, Government and Public Facilities etc).
         </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />

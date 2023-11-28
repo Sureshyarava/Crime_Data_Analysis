@@ -35,10 +35,6 @@ export default function Trend3() {
       </div>
       <div className="main_content">
         <MainPage />
-        <footer id="footer" style={{ marginLeft: "20%" }}><p>Disclaimer: This project is intended for informational
-           and educational purposes only. The analysis and trends presented in this report are based 
-           on publicly available crime data and are 
-          subject to the limitations and accuracy of the data sources.</p></footer>
       </div>
     </div>
   );
@@ -117,8 +113,11 @@ function MainPage() {
       
         <h1 className="element">Day-wise Crime Analysis Trend</h1>
         <h4>
-This crime trend analysis examines historical patterns, emphasizing days of the week. 
-Informed by a multi-line chart, it aids resource optimization for law enforcement and policymakers.</h4>
+        This trend analyses crime incidents for specified crime type and which occured on specified days of week.
+        </h4>
+        <br />
+        <h4>A line graph with time period on X-axis and Number of Crimes on Y-axis will be displayed upon submitting the user input.</h4>
+        <br /><br />
         <div className="content-container">
           <div className="inside1" id="input" style={{ display: showInput ? "block" : "none" }}>
             <br />
@@ -162,6 +161,7 @@ Informed by a multi-line chart, it aids resource optimization for law enforcemen
                 <option value="OFFENSE INVOLVING CHILDREN">OFFENSE INVOLVING CHILDREN</option>
               </select>
               <br />
+              <br></br><br></br>
               <div style={{ display: 'flex', flexDirection: 'row' }}>
   <label style={{ display: 'inline', marginRight: '10px' }}>
     Monday
@@ -227,7 +227,7 @@ Informed by a multi-line chart, it aids resource optimization for law enforcemen
     />
   </label>
 </div>
-
+<br></br>
               <input type="submit" value="Submit" style={{ background: "blue", color: "white", borderRadius: "3px" }} />
             </form>
           </div>

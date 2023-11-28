@@ -11,7 +11,7 @@ GROUP BY C.Year, I.Primary_Description
 ORDER BY C.Year, I.Primary_Description;
 
 
---Trend Query 2
+--Trend Query 2: Geographical based Crime Analysis Trend
 SELECT L.Year, L.Month, COUNT(L.Crime_Id) AS Number_Of_Crimes
 FROM (
     SELECT K.Crime_Id, K.Year, K.Month,
@@ -72,7 +72,7 @@ GROUP BY E.Full_Year, E.DayOfWeek, E.Primary_Description
 ORDER BY E.Full_Year, E.DayOfWeek, E.Primary_Description;
 
 
--- Trend 4 Location-Based Crime Analysis Trend
+-- Trend Query 4: Location-Based Crime Analysis Trend
 SELECT B.Year, B.Location_Type, count(B.Crime_Id) as Number_Of_Crimes
 FROM (
   SELECT A.Crime_Id, A.Year, 
