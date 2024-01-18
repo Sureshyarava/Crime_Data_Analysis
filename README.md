@@ -1,70 +1,19 @@
-# Getting Started with Create React App
+Crime Data Analysis for Safer Communities is a comprehensive study of crime trends, highlighting long-term trends and changes. One of the primary goals of this analysis is to lookat seasonal changes in crime and the flow of crime in the past two decades. The Seasonal
+trend include collecting crime data at various times to determine if any crime occur frequently
+throughout certain seasons. Moreover, the project performs complex computations based on
+previous crime data. Complex queries are used to establish the mean of various types of crimes
+over a longer period of time rather than within certain seasons.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Furthermore, this study helps people in analyzing crimes that occur in a certain place across a
+specific radius over a long period of time which help users to determine if some locations are
+safer than others. Users can also examine how serious crimes have evolved through time with
+help of IUCR codes. This allows us to determine if there is any increase in crime rate of certain
+serious crimes. This also helps in analyzing crimes occured during the day and night over a
+long period of time. This allows user to know when particular types of crimes are more likely
+to occur, allowing us to be more prepared for them.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Finally, the project analyzes when crimes occurred on various days of the week and how crime
+rate has changed for each day over time. This allows us to identify pattern on which days
+specific sorts of crimes are more likely to occur. This project provides a detailed picture of over
+time trends of different crimes that residents of city and law enforcement officials may utilize
+for informed decision-making and proactive crime prevention efforts.
