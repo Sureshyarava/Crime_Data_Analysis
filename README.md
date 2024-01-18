@@ -28,3 +28,13 @@ And the Entity relation diagram for the website is shown below.
 ![ChicagoCrimeERD](https://github.com/Sureshyarava/Crime_Data_Analysis/assets/69299412/e97bdb32-8ac0-466a-b77a-9ecd81057ee2)
 
 And the details about the Project are listed inside the reports folder.
+
+
+## Stack Used
+
+```bash
+Frontend: React
+Database: OracleDB
+Backend: Python
+Framework: Flask
+```
