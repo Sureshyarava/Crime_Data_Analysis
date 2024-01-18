@@ -20,14 +20,14 @@ for informed decision-making and proactive crime prevention efforts.</p>
 
 Below is the network diagram of the website.
 
-![Network (1)](https://github.com/Sureshyarava/Crime_Data_Analysis/assets/69299412/b036a904-5ef5-4343-aa6a-e193aa874fc2)
+<div align="center"><img  align="center" src="https://github.com/Sureshyarava/Crime_Data_Analysis/assets/69299412/b036a904-5ef5-4343-aa6a-e193aa874fc2"  width="70%" height="auto"/></div>
 
 
 And the Entity relation diagram for the website is shown below.
 
-![ChicagoCrimeERD](https://github.com/Sureshyarava/Crime_Data_Analysis/assets/69299412/e97bdb32-8ac0-466a-b77a-9ecd81057ee2)
+<div align="center"><img src="https://github.com/Sureshyarava/Crime_Data_Analysis/assets/69299412/e97bdb32-8ac0-466a-b77a-9ecd81057ee2" width="70%" height="auto"/></div>
 
-And the details about the Project are listed inside the reports folder.
+And the details about the Project are listed inside the deliverables reports folder.
 
 
 ## Stack Used
